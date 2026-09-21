@@ -1,26 +1,108 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #fff8ec;
+  --foreground: #22262e;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+@theme {
+  --font-heading: var(--font-heading), Georgia, serif;
+  --font-sans:
+    var(--font-sans), ui-sans-serif, system-ui, -apple-system,
+    BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+
+  /* Sunset Spectrum */
+  --color-dusk-indigo: #1e2a4a;
+  --color-dusk-indigo-dark: #131a2e;
+  --color-warm-rose: #d9646b;
+  --color-warm-rose-light: #eaa1a6;
+  --color-amber-glow: #f2a65a;
+  --color-amber-light: #f7c897;
+  --color-soft-gold: #fbd98d;
+  --color-soft-gold-light: #fdf0d2;
+
+  /* Bohol Hill Greens */
+  --color-forest-green: #2f5d3a;
+  --color-forest-green-dark: #1e3b25;
+  --color-grass-green: #7ba05b;
+  --color-grass-green-light: #a4c588;
+  --color-sage-mist: #e8efe5;
+
+  /* Neutrals */
+  --color-warm-cream: #fff8ec;
+  --color-sand-white: #faf5eb;
+  --color-charcoal: #22262e;
+  --color-charcoal-deep: #14171c;
+  --color-slate-muted: #525866;
+  --color-slate-light: #8e95a5;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }
 
 body {
-  background: var(--background);
+  background-color: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans);
+  overflow-x: hidden;
+}
+
+/* Fluid Typography utilities */
+.text-fluid-display {
+  font-size: clamp(2.75rem, 5vw + 1rem, 5.25rem);
+  line-height: 1.08;
+  letter-spacing: -0.025em;
+}
+
+.text-fluid-h1 {
+  font-size: clamp(2.15rem, 3.5vw + 0.5rem, 3.5rem);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+}
+
+.text-fluid-h2 {
+  font-size: clamp(1.65rem, 2.2vw + 0.5rem, 2.5rem);
+  line-height: 1.25;
+  letter-spacing: -0.015em;
+}
+
+.text-fluid-h3 {
+  font-size: clamp(1.25rem, 1.4vw + 0.25rem, 1.75rem);
+  line-height: 1.35;
+}
+
+.text-fluid-lead {
+  font-size: clamp(1.05rem, 0.5vw + 0.95rem, 1.25rem);
+  line-height: 1.6;
+}
+
+/* Scroll reveal helper classes */
+.reveal-init {
+  opacity: 0;
+  transform: translateY(24px);
+  transition:
+    opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.reveal-visible {
+  opacity: 1;
+  transform: translateY(0);
 }
