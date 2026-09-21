@@ -104,6 +104,33 @@ export function Footer({
           </div>
         </div>
 
+        {/* Demo Disclaimer */}
+        <div className="border-amber-glow/25 bg-amber-glow/5 mt-10 space-y-2 rounded-xl border px-5 py-5 sm:px-6">
+          <p className="text-amber-glow flex items-center gap-2 text-xs font-bold tracking-wider uppercase">
+            <svg
+              className="h-4 w-4 shrink-0"
+              fill="currentColor"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+            >
+              <path
+                fillRule="evenodd"
+                d="M9.401 3.003c1.155-2 4.043-2 5.197 0l7.355 12.748c1.154 2-.29 4.5-2.599 4.5H4.645c-2.309 0-3.752-2.5-2.598-4.5L9.4 3.003zM12 8.25a.75.75 0 01.75.75v3.75a.75.75 0 01-1.5 0V9a.75.75 0 01.75-.75zm0 8.25a.75.75 0 100-1.5.75.75 0 000 1.5z"
+                clipRule="evenodd"
+              />
+            </svg>
+            Demo Website Disclaimer
+          </p>
+          <p className="text-warm-cream/70 max-w-3xl text-xs leading-relaxed sm:text-sm">
+            This website is a demo presentation prototype only. It is not an
+            official site and is not affiliated with or endorsed by Kankoka
+            Hills, the Candijay Municipal Tourism Office, or any government
+            agency. All data shown — including fees, operating hours, contact
+            numbers, email addresses, and photos — is illustrative demo content
+            and does not reflect real, current information.
+          </p>
+        </div>
+
         {/* Bottom Bar */}
         <div className="text-warm-cream/50 flex flex-col items-center justify-between gap-4 pt-8 text-xs sm:flex-row">
           <p>

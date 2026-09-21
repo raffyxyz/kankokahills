@@ -104,28 +104,77 @@ export function CtaContactSection({ siteConfig }: CtaContactSectionProps) {
             </div>
 
             <div className="text-warm-cream/80 grid grid-cols-1 gap-4 text-xs sm:grid-cols-2 sm:text-sm">
-              <div className="bg-warm-cream/5 border-warm-cream/5 space-y-1 rounded-xl border p-4">
+              <div className="bg-warm-cream/5 border-warm-cream/5 space-y-1.5 rounded-xl border p-4">
                 <span className="text-warm-cream/60 block text-[11px] font-semibold uppercase">
                   Tourism Office Contact
                 </span>
-                <p className="text-soft-gold font-mono font-medium">
-                  {siteConfig.contact.phonePlaceholder}
-                </p>
-                <p className="text-soft-gold/80 font-mono">
-                  {siteConfig.contact.emailPlaceholder}
-                </p>
+                <a
+                  href={`tel:${siteConfig.contact.phone.replace(/[^0-9+]/g, "")}`}
+                  className="text-soft-gold hover:text-amber-glow focus-visible:ring-amber-glow inline-flex items-center gap-1.5 font-mono font-medium transition-colors focus-visible:ring-2 focus-visible:outline-none"
+                >
+                  <svg
+                    className="h-3.5 w-3.5 shrink-0"
+                    fill="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z" />
+                  </svg>
+                  {siteConfig.contact.phone}
+                </a>
+                <a
+                  href={`tel:${siteConfig.contact.mobile.replace(/[^0-9+]/g, "")}`}
+                  className="text-soft-gold/80 hover:text-amber-glow focus-visible:ring-amber-glow inline-flex items-center gap-1.5 font-mono transition-colors focus-visible:ring-2 focus-visible:outline-none"
+                >
+                  <svg
+                    className="h-3.5 w-3.5 shrink-0"
+                    fill="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path d="M10.5 1.5H8.25A2.25 2.25 0 006 3.75v16.5a2.25 2.25 0 002.25 2.25h7.5A2.25 2.25 0 0018 20.25V3.75a2.25 2.25 0 00-2.25-2.25H13.5m-3 0V3h3V1.5m-3 0h3m-3 18.75h3" />
+                  </svg>
+                  {siteConfig.contact.mobile}
+                </a>
+                <a
+                  href={`mailto:${siteConfig.contact.email}`}
+                  className="text-soft-gold/80 hover:text-amber-glow focus-visible:ring-amber-glow inline-flex items-center gap-1.5 font-mono break-all transition-colors focus-visible:ring-2 focus-visible:outline-none"
+                >
+                  <svg
+                    className="h-3.5 w-3.5 shrink-0"
+                    fill="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path d="M1.5 8.67v8.58a3 3 0 003 3h15a3 3 0 003-3V8.67l-8.928 5.493a3 3 0 01-3.144 0L1.5 8.67z" />
+                    <path d="M22.5 6.908V6.75a3 3 0 00-3-3h-15a3 3 0 00-3 3v.158l9.714 5.978a1.5 1.5 0 001.572 0L22.5 6.908z" />
+                  </svg>
+                  {siteConfig.contact.email}
+                </a>
               </div>
 
               <div className="bg-warm-cream/5 border-warm-cream/5 space-y-1 rounded-xl border p-4">
                 <span className="text-warm-cream/60 block text-[11px] font-semibold uppercase">
-                  Official Channels & Guides
+                  Official Channels
                 </span>
-                <p className="text-soft-gold font-mono font-medium">
-                  {siteConfig.contact.messengerPlaceholder}
-                </p>
-                <p className="text-soft-gold/80 font-mono">
-                  {siteConfig.contact.socialPlaceholder}
-                </p>
+                <a
+                  href={siteConfig.contact.facebookUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-soft-gold/80 hover:text-amber-glow focus-visible:ring-amber-glow inline-flex items-center gap-1 font-mono transition-colors focus-visible:ring-2 focus-visible:outline-none"
+                >
+                  <svg
+                    className="h-3.5 w-3.5"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                    />
+                  </svg>
+                  Official Facebook Page
+                </a>
               </div>
             </div>
 

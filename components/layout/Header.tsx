@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
@@ -34,6 +34,7 @@ export function Header({
 }: HeaderProps) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const hamburgerRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -45,6 +46,19 @@ export function Header({
 
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  // Close the mobile menu when resizing into the desktop breakpoint so the
+  // drawer never stays mounted-and-open invisibly (which would trap scrolling).
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth >= 1024) {
+        setIsMobileMenuOpen(false);
+      }
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   return (
@@ -101,6 +115,7 @@ export function Header({
 
             {/* Mobile menu trigger */}
             <button
+              ref={hamburgerRef}
               type="button"
               onClick={() => setIsMobileMenuOpen(true)}
               aria-label="Open navigation menu"
@@ -128,7 +143,11 @@ export function Header({
       {/* Mobile Drawer */}
       <MobileNav
         isOpen={isMobileMenuOpen}
-        onClose={() => setIsMobileMenuOpen(false)}
+        onClose={() => {
+          setIsMobileMenuOpen(false);
+          // Return focus to the trigger that opened the menu
+          hamburgerRef.current?.focus();
+        }}
         items={navLinks}
         cta={primaryCta}
       />

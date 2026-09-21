@@ -96,9 +96,9 @@ export interface SiteConfig {
   secondaryCta: ActionLink;
   contact: {
     tourismOffice: string;
-    phonePlaceholder: string;
-    emailPlaceholder: string;
-    messengerPlaceholder: string;
-    socialPlaceholder: string;
+    phone: string;
+    mobile: string;
+    email: string;
+    facebookUrl: string;
   };
 }

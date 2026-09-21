@@ -59,29 +59,44 @@ export function MobileNav({ isOpen, onClose, items, cta }: MobileNavProps) {
     document.body.style.overflow = "hidden";
     window.addEventListener("keydown", handleKeyDown);
 
-    // Initial focus on close button
-    setTimeout(() => {
-      firstFocusableRef.current?.focus();
-    }, 50);
-
     return () => {
       document.body.style.overflow = originalOverflow;
       window.removeEventListener("keydown", handleKeyDown);
     };
   }, [isOpen, onClose]);
 
-  if (!isOpen) return null;
+  // Move focus to the close button once the drawer is open
+  useEffect(() => {
+    if (!isOpen) return;
+    const timer = setTimeout(() => {
+      firstFocusableRef.current?.focus();
+    }, 150);
+    return () => clearTimeout(timer);
+  }, [isOpen]);
 
+  // Keep the dialog mounted even when closed so exit animations can play.
+  // `inert` + `aria-hidden` remove it from tab order and the a11y tree.
   return (
     <div
       role="dialog"
       aria-modal="true"
       aria-label="Navigation Menu"
       ref={dialogRef}
-      className="bg-charcoal-deep/95 text-warm-cream fixed inset-0 z-50 flex flex-col backdrop-blur-lg transition-all duration-300 lg:hidden"
+      inert={!isOpen}
+      aria-hidden={!isOpen}
+      className={`bg-charcoal-deep/95 text-warm-cream fixed inset-0 z-50 flex flex-col backdrop-blur-lg transition-all duration-300 ease-out lg:hidden ${
+        isOpen
+          ? "pointer-events-auto translate-y-0 opacity-100"
+          : "pointer-events-none translate-y-4 opacity-0"
+      }`}
     >
       {/* Header bar with close button */}
-      <div className="border-warm-cream/10 flex items-center justify-between border-b px-6 py-5">
+      <div
+        className={`border-warm-cream/10 flex items-center justify-between border-b px-6 py-5 transition-opacity duration-300 ease-out ${
+          isOpen ? "opacity-100" : "opacity-0"
+        }`}
+        style={{ transitionDelay: isOpen ? "50ms" : "0ms" }}
+      >
         <span className="font-heading text-amber-glow font-serif text-xl tracking-tight">
           Kankoka Hills
         </span>
@@ -110,18 +125,30 @@ export function MobileNav({ isOpen, onClose, items, cta }: MobileNavProps) {
 
       {/* Navigation links */}
       <nav className="flex flex-1 flex-col justify-center space-y-4 px-8 py-8">
-        {items.map((item) => (
+        {items.map((item, index) => (
           <Link
             key={item.href}
             href={item.href}
             onClick={onClose}
-            className="text-warm-cream/90 hover:text-amber-glow border-warm-cream/5 border-b py-2 font-serif text-2xl font-medium transition-colors"
+            className={`text-warm-cream/90 hover:text-amber-glow border-warm-cream/5 border-b py-2 font-serif text-2xl font-medium transition-all duration-300 ease-out ${
+              isOpen ? "translate-y-0 opacity-100" : "translate-y-2 opacity-0"
+            }`}
+            style={{
+              transitionDelay: isOpen ? `${50 + index * 35}ms` : "0ms",
+            }}
           >
             {item.label}
           </Link>
         ))}
 
-        <div className="pt-8">
+        <div
+          className={`pt-8 transition-all duration-300 ease-out ${
+            isOpen ? "translate-y-0 opacity-100" : "translate-y-2 opacity-0"
+          }`}
+          style={{
+            transitionDelay: isOpen ? `${50 + items.length * 35}ms` : "0ms",
+          }}
+        >
           <Button
             href={cta.href}
             variant="sunset"

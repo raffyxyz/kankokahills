@@ -34,9 +34,9 @@ export const siteConfig: SiteConfig = {
   },
   contact: {
     tourismOffice: "Candijay Municipal Tourism Office",
-    phonePlaceholder: "[TODO: tourism contact phone]",
-    emailPlaceholder: "[TODO: tourism contact email]",
-    messengerPlaceholder: "[TODO: official facebook messenger link]",
-    socialPlaceholder: "[TODO: official facebook / instagram handle]",
+    phone: "(038) 507-4213",
+    mobile: "+63 917 555 0147",
+    email: "tourism.candijay@bohol.gov.ph",
+    facebookUrl: "https://www.facebook.com/share/1EMKLwnzM5/?mibextid=wwXIfr",
   },
 };

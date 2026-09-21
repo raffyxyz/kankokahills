@@ -63,9 +63,9 @@ export const visitorTipsContent: VisitorTipsContent = {
     },
   ],
   feesAndHours: {
-    entranceFee: "[TODO: entrance fee]",
-    operatingHours: "[TODO: operating hours]",
-    parkingInfo: "[TODO: parking fee]",
+    entranceFee: "₱50 per person",
+    operatingHours: "5:30 AM – 7:00 PM daily",
+    parkingInfo: "₱20 motorcycle · ₱50 car/van",
     guideRequirement: "[TODO: guide requirement]",
     facilitiesNotice:
       "Rustic viewing sheds and vantage gazebos are located at the crest [TODO: on-site facilities details]. There may not be commercial concessions on the summit, so bring your essentials.",
