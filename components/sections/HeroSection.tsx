@@ -34,6 +34,7 @@ export function HeroSection({
           alt={image.alt}
           fill
           priority
+          quality={85}
           sizes="100vw"
           className="animate-pulse-slow scale-105 object-cover object-center transition-transform duration-[12000ms] ease-out motion-reduce:scale-100"
         />
