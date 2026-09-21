@@ -78,7 +78,7 @@ export function MobileNav({ isOpen, onClose, items, cta }: MobileNavProps) {
       aria-modal="true"
       aria-label="Navigation Menu"
       ref={dialogRef}
-      className="bg-charcoal-deep/95 text-warm-cream fixed inset-0 z-50 flex flex-col backdrop-blur-lg transition-all duration-300 md:hidden"
+      className="bg-charcoal-deep/95 text-warm-cream fixed inset-0 z-50 flex flex-col backdrop-blur-lg transition-all duration-300 lg:hidden"
     >
       {/* Header bar with close button */}
       <div className="border-warm-cream/10 flex items-center justify-between border-b px-6 py-5">
