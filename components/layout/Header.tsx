@@ -66,7 +66,7 @@ export function Header({
       <header
         className={`fixed top-0 right-0 left-0 z-40 transition-all duration-300 ${
           isScrolled
-            ? "bg-charcoal-deep/90 border-warm-cream/10 border-b py-3.5 shadow-lg shadow-black/10 backdrop-blur-md"
+            ? "bg-charcoal-deep/90 py-3.5 shadow-lg shadow-black/10 backdrop-blur-md"
             : "bg-gradient-to-b from-black/60 via-black/20 to-transparent py-5"
         }`}
       >
@@ -105,9 +105,9 @@ export function Header({
             <div className="hidden sm:block">
               <Button
                 href={primaryCta.href}
-                variant={isScrolled ? "primary" : "sunset"}
+                variant="sunset"
                 size="sm"
-                className="shadow-sm"
+                className={`shadow-sm ${isScrolled ? "btn-scrolled" : ""}`}
               >
                 {primaryCta.label}
               </Button>

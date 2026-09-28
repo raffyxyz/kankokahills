@@ -56,7 +56,7 @@ export function Button({
       "border border-warm-cream/40 text-warm-cream hover:bg-warm-cream/10 hover:border-warm-cream active:scale-[0.98]",
     ghost: "text-charcoal hover:bg-charcoal/5 active:scale-[0.98]",
     sunset:
-      "bg-gradient-to-r from-warm-rose via-amber-glow to-soft-gold text-charcoal font-semibold shadow-lg shadow-warm-rose/20 hover:brightness-105 active:scale-[0.98]",
+      "bg-gradient-to-r from-[var(--gradient-from)] via-[var(--gradient-via)] to-[var(--gradient-to)] text-charcoal font-semibold shadow-lg shadow-warm-rose/20 hover:brightness-105 active:scale-[0.98]",
   };
 
   const combinedClasses = `${baseClasses} ${sizeClasses[size]} ${variantClasses[variant]} ${className}`;

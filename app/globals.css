@@ -92,6 +92,32 @@ body {
   line-height: 1.6;
 }
 
+/* Animatable gradient custom properties for smooth color transitions */
+@property --gradient-from {
+  syntax: '<color>';
+  inherits: true;
+  initial-value: #d9646b;
+}
+
+@property --gradient-via {
+  syntax: '<color>';
+  inherits: true;
+  initial-value: #f2a65a;
+}
+
+@property --gradient-to {
+  syntax: '<color>';
+  inherits: true;
+  initial-value: #fbd98d;
+}
+
+/* Scrolled state: collapses the sunset gradient to a solid amber */
+.btn-scrolled {
+  --gradient-from: var(--color-amber-glow);
+  --gradient-via: var(--color-amber-glow);
+  --gradient-to: var(--color-amber-glow);
+}
+
 /* Scroll reveal helper classes */
 .reveal-init {
   opacity: 0;
