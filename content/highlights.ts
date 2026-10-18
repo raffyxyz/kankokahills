@@ -1,14 +1,12 @@
 import { HighlightItem } from "./types";
 
 export interface HighlightsContent {
-  eyebrow: string;
   title: string;
   description: string;
   items: HighlightItem[];
 }
 
 export const highlightsContent: HighlightsContent = {
-  eyebrow: "The Experience",
   title: "What Awaits You at the Top",
   description:
     "From wide-open horizons to dramatic golden sunsets, Kankoka Hills presents an unforgettable perspective of Bohol's countryside.",
@@ -28,17 +26,17 @@ export const highlightsContent: HighlightsContent = {
       },
     },
     {
-      id: "sunset",
-      title: "The Golden Sunset Spectacle",
-      tagline: "Dusk in Bohol",
+      id: "rolling-ridges",
+      title: "Contoured Ridges & Morning Mist",
+      tagline: "Pristine Nature",
       description:
-        "As the afternoon wanes, the sky softens into luminous bands of amber, warm rose, and twilight indigo over the mountain horizon.",
-      tag: "Signature View",
+        "Early risers are greeted by gentle low-lying mist curling between green peaks and crisp mountain breezes.",
+      tag: "Morning Light",
       image: {
-        src: "/images/dusk-16x9.jpg",
-        alt: "Dramatic golden hour and sunset sky over the silhouette of Kankoka Hills",
-        width: 1280,
-        height: 720,
+        src: "/images/view-hills-2.jpg",
+        alt: "Lush undulating hills and valleys under clear blue skies in Candijay",
+        width: 2048,
+        height: 1536,
       },
     },
     {
@@ -56,17 +54,17 @@ export const highlightsContent: HighlightsContent = {
       },
     },
     {
-      id: "rolling-ridges",
-      title: "Contoured Ridges & Morning Mist",
-      tagline: "Pristine Nature",
+      id: "sunset",
+      title: "The Golden Sunset Spectacle",
+      tagline: "Dusk in Bohol",
       description:
-        "Early risers are greeted by gentle low-lying mist curling between green peaks and crisp mountain breezes.",
-      tag: "Morning Light",
+        "As the afternoon wanes, the sky softens into luminous bands of amber, warm rose, and twilight indigo over the mountain horizon.",
+      tag: "Signature View",
       image: {
-        src: "/images/view-hills-2.jpg",
-        alt: "Lush undulating hills and valleys under clear blue skies in Candijay",
-        width: 2048,
-        height: 1536,
+        src: "/images/dusk-16x9.jpg",
+        alt: "Dramatic golden hour and sunset sky over the silhouette of Kankoka Hills",
+        width: 1280,
+        height: 720,
       },
     },
   ],

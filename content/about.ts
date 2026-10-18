@@ -1,7 +1,6 @@
 import { ImageAsset, StatItem } from "./types";
 
 export interface AboutContent {
-  eyebrow: string;
   title: string;
   lead: string;
   paragraphs: string[];
@@ -10,7 +9,6 @@ export interface AboutContent {
 }
 
 export const aboutContent: AboutContent = {
-  eyebrow: "The Candijay Viewpoint",
   title: "A Quiet Sanctuary Above Bohol’s Rolling Landscape",
   lead: "Perched high atop Candijay, Kankoka Hills offers one of the most breathtaking natural vantage points in eastern Bohol.",
   paragraphs: [

@@ -1,14 +1,12 @@
 import { FaqItem } from "./types";
 
 export interface FaqContent {
-  eyebrow: string;
   title: string;
   description: string;
   items: FaqItem[];
 }
 
 export const faqContent: FaqContent = {
-  eyebrow: "Frequently Asked Questions",
   title: "Everything You Need to Know",
   description:
     "Find answers to common questions about planning your visit to Kankoka Hills in Candijay, Bohol.",

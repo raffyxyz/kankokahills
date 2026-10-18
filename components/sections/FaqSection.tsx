@@ -1,6 +1,5 @@
 import React from "react";
 import { Container } from "@/components/ui/Container";
-import { RevealOnScroll } from "@/components/ui/RevealOnScroll";
 import { Accordion } from "@/components/ui/Accordion";
 import { FaqContent } from "@/content/faq";
 
@@ -10,27 +9,31 @@ export interface FaqSectionProps {
 
 export function FaqSection({ content }: FaqSectionProps) {
   return (
-    <section id="faq" className="bg-warm-cream text-charcoal py-20 sm:py-28">
+    <section id="faq" className="bg-chalk py-16 sm:py-20 lg:py-24">
       <Container>
-        {/* Section Header */}
-        <div className="mx-auto mb-16 max-w-3xl space-y-4 text-center">
-          <RevealOnScroll>
-            <span className="text-amber-glow text-xs font-bold tracking-widest uppercase">
-              {content.eyebrow}
-            </span>
-            <h2 className="font-heading text-fluid-h1 text-charcoal mt-2 font-serif font-bold tracking-tight">
-              {content.title}
-            </h2>
-            <p className="text-fluid-lead text-slate-muted mx-auto mt-4 max-w-2xl">
-              {content.description}
+        <div className="rail-grid rail-rule">
+          <div className="rail">
+            <p className="rail-label">FAQ</p>
+            <p className="text-datum text-ink-soft mt-2">
+              {content.items.length} questions
             </p>
-          </RevealOnScroll>
-        </div>
+          </div>
 
-        {/* Accessible Accordion Component */}
-        <RevealOnScroll delayMs={100}>
-          <Accordion items={content.items} />
-        </RevealOnScroll>
+          <div className="rail-body">
+            <div className="max-w-3xl">
+              <h2 className="font-heading text-h1 text-ink max-w-[16ch]">
+                {content.title}
+              </h2>
+              <p className="text-lead text-ink-soft mt-4 max-w-[52ch]">
+                {content.description}
+              </p>
+            </div>
+
+            <div className="mt-10 max-w-4xl">
+              <Accordion items={content.items} />
+            </div>
+          </div>
+        </div>
       </Container>
     </section>
   );

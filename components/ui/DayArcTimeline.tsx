@@ -1,161 +1,155 @@
-import React from "react";
+"use client";
+
+import React, { useEffect, useRef } from "react";
+
+// Sun positions across the day, aligned to the four time columns below the
+// arc: low at dawn, highest at midday, descending through golden hour, on the
+// horizon by dusk.
+const STOPS = [
+  { x: 120, y: 150, time: "5:30 AM", name: "Dawn mist", fill: "#8FAEB8" },
+  { x: 360, y: 55, time: "11:00 AM", name: "Clear vistas", fill: "#14607A" },
+  { x: 600, y: 118, time: "5:00 PM", name: "Golden hour", fill: "#E4A038" },
+  { x: 840, y: 190, time: "6:00 PM", name: "Sunset & dusk", fill: "#0C1614" },
+];
+
+const PATH_POINTS: Array<[number, number]> = [
+  [30, 215],
+  [120, 150],
+  [360, 55],
+  [600, 118],
+  [840, 190],
+  [930, 215],
+];
+
+/** Catmull-Rom through the points, emitted as cubic beziers. */
+function smoothPath(points: Array<[number, number]>): string {
+  let d = `M ${points[0][0]} ${points[0][1]}`;
+  for (let i = 0; i < points.length - 1; i++) {
+    const p0 = points[i - 1] ?? points[i];
+    const p1 = points[i];
+    const p2 = points[i + 1];
+    const p3 = points[i + 2] ?? points[i + 1];
+    const c1: [number, number] = [
+      p1[0] + (p2[0] - p0[0]) / 6,
+      p1[1] + (p2[1] - p0[1]) / 6,
+    ];
+    const c2: [number, number] = [
+      p2[0] - (p3[0] - p1[0]) / 6,
+      p2[1] - (p3[1] - p1[1]) / 6,
+    ];
+    d += ` C ${c1[0].toFixed(1)} ${c1[1].toFixed(1)}, ${c2[0].toFixed(1)} ${c2[1].toFixed(1)}, ${p2[0]} ${p2[1]}`;
+  }
+  return d;
+}
 
 export function DayArcTimeline() {
+  const wrapRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const el = wrapRef.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            el.classList.add("arc-drawn");
+            observer.unobserve(el);
+          }
+        });
+      },
+      { threshold: 0.25 }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <div
-      className="mx-auto mb-12 w-full max-w-3xl select-none"
+      ref={wrapRef}
+      className="mx-auto hidden w-full max-w-5xl select-none md:block"
       aria-hidden="true"
     >
-      <div className="relative pt-6 pb-2">
-        <svg
-          className="h-28 w-full overflow-visible sm:h-36"
-          viewBox="0 0 600 160"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          {/* Horizon Line */}
-          <line
-            x1="20"
-            y1="140"
-            x2="580"
-            y2="140"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeDasharray="4 4"
-            className="text-charcoal/20"
-          />
+      <svg
+        className="block h-auto w-full overflow-visible"
+        viewBox="0 0 960 250"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <defs>
+          <radialGradient id="sunGlow" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stopColor="#E4A038" stopOpacity="0.55" />
+            <stop offset="100%" stopColor="#E4A038" stopOpacity="0" />
+          </radialGradient>
+        </defs>
 
-          {/* Sun Trajectory Arc */}
-          <path
-            d="M 40 140 C 140 20, 460 20, 560 140"
-            stroke="url(#arcGradient)"
-            strokeWidth="3"
-            strokeLinecap="round"
-          />
+        {/* Horizon */}
+        <line
+          x1="10"
+          y1="215"
+          x2="950"
+          y2="215"
+          stroke="currentColor"
+          strokeWidth="1"
+          strokeDasharray="3 5"
+          className="text-ink/30"
+        />
 
-          {/* Gradient Definition for Arc */}
-          <defs>
-            <linearGradient id="arcGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stopColor="#FBD98D" />
-              <stop offset="35%" stopColor="#7BA05B" />
-              <stop offset="70%" stopColor="#F2A65A" />
-              <stop offset="100%" stopColor="#D9646B" />
-            </linearGradient>
-            <radialGradient id="sunGlow" cx="50%" cy="50%" r="50%">
-              <stop offset="0%" stopColor="#FBD98D" stopOpacity="0.8" />
-              <stop offset="100%" stopColor="#FBD98D" stopOpacity="0" />
-            </radialGradient>
-          </defs>
+        {/* Sun path across the day */}
+        <path
+          d={smoothPath(PATH_POINTS)}
+          pathLength={1200}
+          className="arc-path"
+          stroke="#0C1614"
+          strokeOpacity={0.55}
+          strokeWidth="1.5"
+          strokeLinecap="round"
+        />
 
-          {/* Point 1: Sunrise (Dawn) */}
-          <circle cx="50" cy="130" r="14" fill="url(#sunGlow)" />
-          <circle
-            cx="50"
-            cy="130"
-            r="6"
-            fill="#FBD98D"
-            stroke="#FFF8EC"
-            strokeWidth="2"
-          />
-          <text
-            x="50"
-            y="155"
-            textAnchor="middle"
-            className="fill-charcoal/70 font-sans text-[11px] font-semibold"
+        {STOPS.map((stop, i) => (
+          <g
+            key={stop.time}
+            className="arc-stop"
+            style={{ animationDelay: `${600 + i * 180}ms` }}
           >
-            5:30 AM
-          </text>
-          <text
-            x="50"
-            y="105"
-            textAnchor="middle"
-            className="fill-forest-green font-serif text-[11px] font-bold"
-          >
-            Dawn Mist
-          </text>
-
-          {/* Point 2: Midday Clarity */}
-          <circle cx="210" cy="45" r="14" fill="url(#sunGlow)" />
-          <circle
-            cx="210"
-            cy="45"
-            r="7"
-            fill="#7BA05B"
-            stroke="#FFF8EC"
-            strokeWidth="2"
-          />
-          <text
-            x="210"
-            y="155"
-            textAnchor="middle"
-            className="fill-charcoal/70 font-sans text-[11px] font-semibold"
-          >
-            11:00 AM
-          </text>
-          <text
-            x="210"
-            y="25"
-            textAnchor="middle"
-            className="fill-forest-green font-serif text-[11px] font-bold"
-          >
-            Clear Vistas
-          </text>
-
-          {/* Point 3: Golden Hour (Peak) */}
-          <circle cx="430" cy="65" r="18" fill="url(#sunGlow)" />
-          <circle
-            cx="430"
-            cy="65"
-            r="8"
-            fill="#F2A65A"
-            stroke="#FFF8EC"
-            strokeWidth="2"
-          />
-          <text
-            x="430"
-            y="155"
-            textAnchor="middle"
-            className="fill-charcoal/70 font-sans text-[11px] font-semibold"
-          >
-            5:00 PM
-          </text>
-          <text
-            x="430"
-            y="42"
-            textAnchor="middle"
-            className="fill-warm-rose font-serif text-[11px] font-bold"
-          >
-            Golden Hour
-          </text>
-
-          {/* Point 4: Sunset Dusk */}
-          <circle cx="550" cy="130" r="14" fill="url(#sunGlow)" />
-          <circle
-            cx="550"
-            cy="130"
-            r="6"
-            fill="#D9646B"
-            stroke="#FFF8EC"
-            strokeWidth="2"
-          />
-          <text
-            x="550"
-            y="155"
-            textAnchor="middle"
-            className="fill-charcoal/70 font-sans text-[11px] font-semibold"
-          >
-            6:00 PM
-          </text>
-          <text
-            x="550"
-            y="105"
-            textAnchor="middle"
-            className="fill-dusk-indigo font-serif text-[11px] font-bold"
-          >
-            Sunset & Dusk
-          </text>
-        </svg>
-      </div>
+            <line
+              x1={stop.x}
+              y1={stop.y}
+              x2={stop.x}
+              y2="215"
+              stroke={stop.fill}
+              strokeWidth="1"
+              strokeOpacity="0.4"
+            />
+            {i === 2 && (
+              <circle cx={stop.x} cy={stop.y} r="26" fill="url(#sunGlow)" />
+            )}
+            <circle
+              cx={stop.x}
+              cy={stop.y}
+              r={i === 2 ? 9 : 7}
+              fill={stop.fill}
+              stroke="#E9EDE8"
+              strokeWidth="2.5"
+            />
+            <text
+              x={stop.x}
+              y={stop.y - 22}
+              textAnchor="middle"
+              className="fill-ink font-sans text-[15px] font-semibold"
+            >
+              {stop.name}
+            </text>
+            <text
+              x={stop.x}
+              y="238"
+              textAnchor="middle"
+              className="fill-ink-soft font-sans text-[14px] font-medium tabular-nums"
+            >
+              {stop.time}
+            </text>
+          </g>
+        ))}
+      </svg>
     </div>
   );
 }

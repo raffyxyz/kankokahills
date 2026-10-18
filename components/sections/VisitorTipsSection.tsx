@@ -1,161 +1,146 @@
 import React from "react";
 import { Container } from "@/components/ui/Container";
 import { Badge } from "@/components/ui/Badge";
-import { RevealOnScroll } from "@/components/ui/RevealOnScroll";
 import { VisitorTipsContent } from "@/content/visitorTips";
 
 export interface VisitorTipsSectionProps {
   content: VisitorTipsContent;
 }
 
+const feeRows = (content: VisitorTipsContent) => [
+  { label: "Entrance fee", value: content.feesAndHours.entranceFee },
+  { label: "Visiting hours", value: content.feesAndHours.operatingHours },
+  { label: "Parking", value: content.feesAndHours.parkingInfo },
+];
+
 export function VisitorTipsSection({ content }: VisitorTipsSectionProps) {
   return (
-    <section id="tips" className="bg-warm-cream text-charcoal py-20 sm:py-28">
+    <section id="tips" className="bg-chalk pt-16 sm:pt-20 lg:pt-24">
       <Container>
-        {/* Section Header */}
-        <div className="mx-auto mb-16 max-w-3xl space-y-4 text-center">
-          <RevealOnScroll>
-            <span className="text-forest-green text-xs font-bold tracking-widest uppercase">
-              {content.eyebrow}
-            </span>
-            <h2 className="font-heading text-fluid-h1 text-charcoal mt-2 font-serif font-bold tracking-tight">
+        <div className="rail-grid rail-rule">
+          <div className="rail">
+            <p className="rail-label">Visitor tips</p>
+            <p className="text-datum text-ink-soft mt-2">
+              5:30 AM –
+              <br />
+              7:00 PM daily
+            </p>
+          </div>
+
+          <div className="rail-body">
+            <h2 className="font-heading text-h1 text-ink max-w-[17ch]">
               {content.title}
             </h2>
-            <p className="text-fluid-lead text-slate-muted mx-auto mt-4 max-w-2xl">
+            <p className="text-lead text-ink-soft mt-4 max-w-[54ch]">
               {content.description}
             </p>
-          </RevealOnScroll>
-        </div>
 
-        {/* What to Bring Grid */}
-        <div className="mb-16">
-          <RevealOnScroll>
-            <h3 className="text-charcoal/70 mb-6 text-center text-xs font-bold tracking-wider uppercase">
-              What to Bring & Pack
-            </h3>
-          </RevealOnScroll>
+            {/* What to bring — ruled columns, no box */}
+            <div className="mt-12">
+              <h3 className="font-heading text-h2">What to bring</h3>
 
-          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {content.whatToBring.map((tip, idx) => (
-              <RevealOnScroll key={tip.title} delayMs={idx * 100}>
-                <div className="bg-sand-white border-charcoal/5 flex h-full flex-col justify-between rounded-2xl border p-6 shadow-xs">
-                  <div className="space-y-4">
-                    <div className="bg-forest-green/10 text-forest-green flex h-10 w-10 items-center justify-center rounded-xl font-bold">
-                      {idx + 1}
-                    </div>
-                    <h4 className="font-heading text-charcoal font-serif text-lg font-bold">
-                      {tip.title}
-                    </h4>
-                    <ul className="text-slate-muted space-y-2 text-xs sm:text-sm">
+              <div className="mt-6 grid gap-x-8 gap-y-8 sm:grid-cols-2 lg:grid-cols-4">
+                {content.whatToBring.map((tip) => (
+                  <div
+                    key={tip.title}
+                    className="border-mist border-t pt-4 lg:border-l lg:pl-6 lg:first:border-l-0 lg:first:pl-0"
+                  >
+                    <h4 className="font-heading text-h3">{tip.title}</h4>
+                    <ul className="mt-3 space-y-2">
                       {tip.items.map((item, itemIdx) => (
-                        <li key={itemIdx} className="flex items-start gap-2">
-                          <span className="text-forest-green font-bold">•</span>
+                        <li
+                          key={itemIdx}
+                          className="text-ink-soft flex gap-2 text-[13px] leading-relaxed"
+                        >
+                          <svg
+                            className="text-pine mt-1 h-3.5 w-3.5 shrink-0"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                            strokeWidth={2.5}
+                            aria-hidden="true"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              d="M5 13l4 4L19 7"
+                            />
+                          </svg>
                           <span>{item}</span>
                         </li>
                       ))}
                     </ul>
                   </div>
-                </div>
-              </RevealOnScroll>
-            ))}
+                ))}
+              </div>
+            </div>
+
+            {/* Fees and hours as a spec sheet */}
+            <div className="border-mist mt-14 border-t pt-8">
+              <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
+                <h3 className="font-heading text-h2">
+                  Fees, hours &amp; facilities
+                </h3>
+                <Badge variant="todo">Pending municipal verification</Badge>
+              </div>
+
+              <dl className="mt-6 max-w-3xl">
+                {feeRows(content).map((row) => (
+                  <div
+                    key={row.label}
+                    className="border-mist/70 flex w-full items-baseline gap-3 border-b py-3.5"
+                  >
+                    <dt className="text-ink-soft text-[14px]">{row.label}</dt>
+                    <span
+                      className="border-mist flex-1 -translate-y-1 border-b border-dotted"
+                      aria-hidden="true"
+                    />
+                    <dd className="text-datum text-ink shrink-0 font-semibold">
+                      {row.value}
+                    </dd>
+                  </div>
+                ))}
+              </dl>
+
+              <p className="text-ink-soft mt-5 max-w-[70ch] text-[13px] leading-relaxed">
+                <span className="text-ink font-semibold">
+                  Facilities &amp; amenities:
+                </span>{" "}
+                {content.feesAndHours.facilitiesNotice}
+              </p>
+            </div>
           </div>
         </div>
+      </Container>
 
-        {/* Fees, Hours & Facility Notices */}
-        <RevealOnScroll delayMs={100}>
-          <div className="bg-sand-white border-charcoal/5 mx-auto mb-16 max-w-4xl space-y-6 rounded-3xl border p-8 shadow-md">
-            <div className="border-charcoal/10 flex flex-col justify-between gap-4 border-b pb-4 sm:flex-row sm:items-center">
-              <div>
-                <span className="text-amber-glow text-xs font-bold tracking-wider uppercase">
-                  Official Visitor Notice
-                </span>
-                <h3 className="font-heading text-charcoal mt-1 font-serif text-2xl font-bold">
-                  Fees, Hours & Facilities
-                </h3>
-              </div>
-              <Badge variant="todo">Pending Municipal Verification</Badge>
-            </div>
-
-            <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
-              <div className="bg-warm-cream border-charcoal/5 rounded-xl border p-4">
-                <span className="text-slate-muted mb-1 block text-xs font-semibold uppercase">
-                  Entrance Fee
-                </span>
-                <p className="rounded border border-dashed border-amber-300 bg-amber-100/70 p-2 font-mono text-sm font-bold text-amber-900">
-                  {content.feesAndHours.entranceFee}
-                </p>
-                <span className="text-slate-muted mt-2 block text-[11px]">
-                  Community & maintenance fee
-                </span>
-              </div>
-
-              <div className="bg-warm-cream border-charcoal/5 rounded-xl border p-4">
-                <span className="text-slate-muted mb-1 block text-xs font-semibold uppercase">
-                  Visiting Hours
-                </span>
-                <p className="rounded border border-dashed border-amber-300 bg-amber-100/70 p-2 font-mono text-sm font-bold text-amber-900">
-                  {content.feesAndHours.operatingHours}
-                </p>
-                <span className="text-slate-muted mt-2 block text-[11px]">
-                  Dawn through twilight recommended
-                </span>
-              </div>
-
-              <div className="bg-warm-cream border-charcoal/5 rounded-xl border p-4">
-                <span className="text-slate-muted mb-1 block text-xs font-semibold uppercase">
-                  Parking
-                </span>
-                <p className="rounded border border-dashed border-amber-300 bg-amber-100/70 p-2 font-mono text-sm font-bold text-amber-900">
-                  {content.feesAndHours.parkingInfo}
-                </p>
-                <span className="text-slate-muted mt-2 block text-[11px]">
-                  Near jump-off trail
-                </span>
-              </div>
-            </div>
-
-            <div className="text-slate-muted bg-warm-cream border-charcoal/5 rounded-xl border p-4 text-xs leading-relaxed sm:text-sm">
-              <strong className="text-charcoal">
-                Facilities & Amenities:{" "}
-              </strong>
-              {content.feesAndHours.facilitiesNotice}
-            </div>
-          </div>
-        </RevealOnScroll>
-
-        {/* Leave No Trace Principles Card */}
-        <RevealOnScroll delayMs={200}>
-          <div className="bg-forest-green text-warm-cream mx-auto max-w-4xl rounded-3xl p-8 shadow-xl sm:p-10">
-            <div className="mb-8 space-y-3 text-center sm:text-left">
-              <span className="text-grass-green-light text-xs font-bold tracking-widest uppercase">
-                Environmental Stewardship
-              </span>
-              <h3 className="font-heading text-warm-cream font-serif text-2xl font-bold sm:text-3xl">
+      {/* Stewardship gets the page's only solid green band */}
+      <div className="bg-pine text-chalk mt-16">
+        <Container className="py-14 sm:py-16">
+          <div className="grid gap-8 lg:grid-cols-12 lg:gap-12">
+            <div className="lg:col-span-5">
+              <h3 className="font-heading text-h1 max-w-[14ch]">
                 {content.leaveNoTrace.title}
               </h3>
-              <p className="text-warm-cream/80 max-w-2xl text-sm sm:text-base">
+              <p className="text-chalk/75 mt-4 max-w-[42ch] text-[15px] leading-relaxed">
                 {content.leaveNoTrace.subtitle}
               </p>
             </div>
 
-            <div className="border-warm-cream/15 grid grid-cols-1 gap-6 border-t pt-4 sm:grid-cols-2">
+            <div className="grid gap-6 sm:grid-cols-2 lg:col-span-7">
               {content.leaveNoTrace.principles.map((p, idx) => (
-                <div key={idx} className="space-y-1.5">
-                  <h4 className="font-heading text-soft-gold flex items-center gap-2 font-serif text-lg font-bold">
-                    <span className="bg-forest-green-dark text-soft-gold rounded-full px-2 py-0.5 font-mono text-xs">
-                      0{idx + 1}
-                    </span>
+                <div key={idx} className="border-chalk/20 border-t pt-4">
+                  <h4 className="text-solar font-heading text-[17px] font-medium">
                     {p.title}
                   </h4>
-                  <p className="text-warm-cream/75 text-xs leading-relaxed sm:text-sm">
+                  <p className="text-chalk/75 mt-1.5 text-[13px] leading-relaxed">
                     {p.text}
                   </p>
                 </div>
               ))}
             </div>
           </div>
-        </RevealOnScroll>
-      </Container>
+        </Container>
+      </div>
     </section>
   );
 }

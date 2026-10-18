@@ -109,13 +109,13 @@ export function Lightbox({
       aria-modal="true"
       aria-label="Image gallery lightbox"
       ref={dialogRef}
-      className="text-warm-cream animate-fadeIn fixed inset-0 z-50 flex flex-col bg-black/95 backdrop-blur-md select-none"
+      className="text-chalk animate-fadeIn fixed inset-0 z-50 flex flex-col bg-black/95 backdrop-blur-md select-none"
       onTouchStart={handleTouchStart}
       onTouchEnd={handleTouchEnd}
     >
       {/* Top Bar: Counter & Controls */}
-      <div className="border-warm-cream/10 z-10 flex items-center justify-between border-b bg-black/40 px-6 py-4">
-        <span className="text-warm-cream/70 font-mono text-xs tracking-wider sm:text-sm">
+      <div className="border-chalk/10 z-10 flex items-center justify-between border-b bg-black/40 px-6 py-4">
+        <span className="text-chalk/70 text-xs tabular-nums sm:text-sm">
           {currentIndex + 1} / {photos.length}
         </span>
 
@@ -125,7 +125,7 @@ export function Lightbox({
             type="button"
             onClick={onClose}
             aria-label="Close image viewer (Press Escape)"
-            className="text-warm-cream/80 hover:text-warm-cream hover:bg-warm-cream/15 focus-visible:ring-amber-glow rounded-full p-2 transition-colors focus-visible:ring-2 focus-visible:outline-none"
+            className="text-chalk/80 hover:text-chalk hover:bg-chalk/15 focus-visible:ring-solar rounded-[2px] p-2 transition-colors focus-visible:ring-2 focus-visible:outline-none"
           >
             <svg
               className="h-6 w-6"
@@ -151,7 +151,7 @@ export function Lightbox({
           type="button"
           onClick={handlePrev}
           aria-label="Previous photo (Press Left Arrow)"
-          className="text-warm-cream border-warm-cream/20 focus-visible:ring-amber-glow absolute left-4 z-10 rounded-full border bg-black/50 p-3 backdrop-blur-sm transition-all hover:scale-105 hover:bg-black/80 focus-visible:ring-2 focus-visible:outline-none active:scale-95 sm:left-8"
+          className="text-chalk border-chalk/20 focus-visible:ring-solar absolute left-4 z-10 rounded-[2px] border bg-black/50 p-3 backdrop-blur-sm transition-all hover:scale-105 hover:bg-black/80 focus-visible:ring-2 focus-visible:outline-none active:scale-95 sm:left-8"
         >
           <svg
             className="h-5 w-5 sm:h-6 sm:w-6"
@@ -187,7 +187,7 @@ export function Lightbox({
           type="button"
           onClick={handleNext}
           aria-label="Next photo (Press Right Arrow)"
-          className="text-warm-cream border-warm-cream/20 focus-visible:ring-amber-glow absolute right-4 z-10 rounded-full border bg-black/50 p-3 backdrop-blur-sm transition-all hover:scale-105 hover:bg-black/80 focus-visible:ring-2 focus-visible:outline-none active:scale-95 sm:right-8"
+          className="text-chalk border-chalk/20 focus-visible:ring-solar absolute right-4 z-10 rounded-[2px] border bg-black/50 p-3 backdrop-blur-sm transition-all hover:scale-105 hover:bg-black/80 focus-visible:ring-2 focus-visible:outline-none active:scale-95 sm:right-8"
         >
           <svg
             className="h-5 w-5 sm:h-6 sm:w-6"
@@ -206,11 +206,11 @@ export function Lightbox({
       </div>
 
       {/* Bottom Bar: Caption */}
-      <div className="border-warm-cream/10 border-t bg-black/40 px-6 py-4 text-center">
-        <p className="text-warm-cream/90 mx-auto max-w-2xl text-sm font-medium">
+      <div className="border-chalk/10 border-t bg-black/40 px-6 py-4 text-center">
+        <p className="text-chalk/90 mx-auto max-w-2xl text-sm font-medium">
           {currentPhoto.caption || currentPhoto.alt}
         </p>
-        <span className="text-warm-cream/50 mt-1 block text-[11px]">
+        <span className="text-chalk/50 mt-1 block text-[11px]">
           Use arrow keys or swipe left/right to navigate • Esc to close
         </span>
       </div>

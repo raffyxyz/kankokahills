@@ -1,7 +1,6 @@
 import { RouteStep, TransportOption } from "./types";
 
 export interface DirectionsContent {
-  eyebrow: string;
   title: string;
   description: string;
   departurePoint: string;
@@ -11,7 +10,6 @@ export interface DirectionsContent {
 }
 
 export const directionsContent: DirectionsContent = {
-  eyebrow: "Getting Here",
   title: "How to Reach Kankoka Hills",
   description:
     "Located in Candijay on the eastern coast of Bohol, Kankoka Hills is accessible by motorcycle or private vehicle from Candijay town proper.",

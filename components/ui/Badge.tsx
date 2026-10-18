@@ -10,6 +10,8 @@ export interface BadgeProps {
   icon?: React.ReactNode;
 }
 
+// Tags are rectangular, not pills: they read as annotations in the margin of
+// the page rather than as buttons competing with actions.
 export function Badge({
   children,
   variant = "default",
@@ -17,15 +19,15 @@ export function Badge({
   icon,
 }: BadgeProps) {
   const baseClasses =
-    "inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold tracking-wide uppercase transition-colors";
+    "inline-flex items-center gap-1.5 rounded-[2px] px-2 py-1 text-[12px] leading-none font-medium transition-colors";
 
   const variantClasses: Record<BadgeVariant, string> = {
-    default: "bg-amber-glow/15 text-charcoal border border-amber-glow/30",
-    green: "bg-forest-green/15 text-forest-green border border-forest-green/30",
-    indigo: "bg-dusk-indigo/10 text-dusk-indigo border border-dusk-indigo/20",
-    amber: "bg-amber-glow/20 text-charcoal border border-amber-glow/40",
-    todo: "bg-amber-100 text-amber-900 border border-dashed border-amber-400 font-mono text-[11px] normal-case tracking-normal",
-    outline: "border border-charcoal/20 text-charcoal/80 bg-transparent",
+    default: "bg-solar/15 text-[#8a5c10] border border-solar/40",
+    green: "bg-pine/10 text-pine border border-pine/30",
+    indigo: "bg-tide/10 text-tide border border-tide/30",
+    amber: "bg-solar/20 text-[#7d520d] border border-solar/50",
+    todo: "text-ink-soft border border-dashed border-ink/30 bg-transparent text-[11px]",
+    outline: "border border-ink/20 text-ink-soft bg-transparent",
   };
 
   return (

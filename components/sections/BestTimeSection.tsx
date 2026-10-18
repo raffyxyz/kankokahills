@@ -1,7 +1,5 @@
 import React from "react";
 import { Container } from "@/components/ui/Container";
-import { Badge } from "@/components/ui/Badge";
-import { RevealOnScroll } from "@/components/ui/RevealOnScroll";
 import { DayArcTimeline } from "@/components/ui/DayArcTimeline";
 import { TimingContent } from "@/content/timing";
 
@@ -9,111 +7,134 @@ export interface BestTimeSectionProps {
   content: TimingContent;
 }
 
+// The band's own ground moves with the day: cool dawn at the left edge, bright
+// noon, golden hour, then the first dusk — the same four stops as the arc.
+const DAYLIGHT_GROUND =
+  "linear-gradient(105deg, #D5E0E3 0%, #E9EEEA 18%, #FAFBF7 36%, #FCF6E7 52%, #F6E3BC 70%, #EBDCDF 86%, #D9DDE3 100%)";
+
+const STAGE_COLOR: Record<string, string> = {
+  sunrise: "#8FAEB8",
+  daytime: "#14607A",
+  sunset: "#E4A038",
+  twilight: "#0C1614",
+};
+
 export function BestTimeSection({ content }: BestTimeSectionProps) {
   return (
-    <section id="timing" className="bg-warm-cream text-charcoal py-20 sm:py-28">
+    <section
+      id="timing"
+      className="text-ink py-16 sm:py-20 lg:py-24"
+      style={{ background: DAYLIGHT_GROUND }}
+    >
       <Container>
-        {/* Header */}
-        <div className="mx-auto mb-12 max-w-3xl space-y-4 text-center">
-          <RevealOnScroll>
-            <span className="text-amber-glow text-xs font-bold tracking-widest uppercase">
-              {content.eyebrow}
-            </span>
-            <h2 className="font-heading text-fluid-h1 text-charcoal mt-2 font-serif font-bold tracking-tight">
-              {content.title}
-            </h2>
-            <p className="text-fluid-lead text-slate-muted mx-auto mt-4 max-w-2xl">
-              {content.description}
-            </p>
-          </RevealOnScroll>
+        {/* The arc is symmetric, so its header holds the same axis — the one
+            centered section on the page, by intent */}
+        <div className="mx-auto max-w-3xl space-y-4 text-center">
+          <h2 className="font-heading text-h1">{content.title}</h2>
+          <p className="text-lead text-ink-soft mx-auto max-w-[46ch]">
+            {content.description}
+          </p>
         </div>
 
-        {/* Visual Day-Arc Graphic */}
-        <RevealOnScroll delayMs={100}>
+        <div className="mt-12 lg:mt-14">
           <DayArcTimeline />
-        </RevealOnScroll>
-
-        {/* Time Slot Cards */}
-        <div className="mb-16 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
-          {content.slots.map((slot, idx) => (
-            <RevealOnScroll key={slot.id} delayMs={idx * 100}>
-              <div className="bg-sand-white/90 border-charcoal/5 hover:border-amber-glow/30 flex h-full flex-col justify-between rounded-2xl border p-6 shadow-xs transition-all hover:shadow-md">
-                <div className="space-y-3">
-                  <div className="flex items-center justify-between gap-2">
-                    <span className="text-forest-green text-xs font-bold tracking-wider uppercase">
-                      {slot.period}
-                    </span>
-                    <span className="text-charcoal/70 bg-charcoal/5 rounded px-2 py-0.5 font-mono text-xs font-semibold">
-                      {slot.timeRange}
-                    </span>
-                  </div>
-
-                  <h3 className="font-heading text-charcoal font-serif text-lg font-bold">
-                    {slot.title}
-                  </h3>
-
-                  <p className="text-slate-muted text-sm leading-relaxed">
-                    {slot.description}
-                  </p>
-                </div>
-
-                <div className="border-charcoal/10 mt-4 space-y-2 border-t pt-6">
-                  <Badge variant="default" className="w-fit text-[11px]">
-                    {slot.lightingBadge}
-                  </Badge>
-                  <p className="text-charcoal/80 text-xs">
-                    <span className="text-charcoal font-semibold">
-                      Ideal for:
-                    </span>{" "}
-                    {slot.recommendedFor}
-                  </p>
-                </div>
-              </div>
-            </RevealOnScroll>
-          ))}
+          {/* Compact stand-in for the arc on small screens */}
+          <div className="relative mx-auto mb-8 h-1.5 w-full max-w-md md:hidden">
+            <div
+              className="absolute inset-0"
+              style={{ background: DAYLIGHT_GROUND }}
+              aria-hidden="true"
+            />
+            {[12.5, 37.5, 62.5, 87.5].map((left) => (
+              <span
+                key={left}
+                className="absolute top-1/2 h-3 w-3 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-[#E9EDE8]"
+                style={{
+                  left: `${left}%`,
+                  background:
+                    left < 25
+                      ? STAGE_COLOR.sunrise
+                      : left < 50
+                        ? STAGE_COLOR.daytime
+                        : left < 75
+                          ? STAGE_COLOR.sunset
+                          : STAGE_COLOR.twilight,
+                }}
+                aria-hidden="true"
+              />
+            ))}
+          </div>
         </div>
 
-        {/* Seasonal Guidance Callout */}
-        <RevealOnScroll delayMs={200}>
-          <div className="bg-sage-mist/40 border-forest-green/20 mx-auto max-w-4xl rounded-2xl border p-6 sm:p-8">
-            <div className="mb-4 flex flex-col items-start gap-4 sm:flex-row sm:items-center">
-              <div className="bg-forest-green/10 text-forest-green rounded-lg p-2">
-                <svg
-                  className="h-5 w-5"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"
-                  />
-                </svg>
+        {/* The four stops, as ruled columns rather than cards. The block is
+            held to the arc's own width so each column sits under its stop. */}
+        <div className="divide-ink/15 border-ink/20 mx-auto max-w-5xl divide-y border-y md:grid md:grid-cols-4 md:divide-x md:divide-y-0">
+          {content.slots.map((slot) => (
+            <div
+              key={slot.id}
+              className="flex h-full flex-col md:px-5 md:first:pl-0 md:last:pr-0"
+            >
+              <div className="pt-6 pb-4 md:pt-7">
+                <span
+                  className="mb-4 block h-1 w-12"
+                  style={{ background: STAGE_COLOR[slot.id] ?? "#E4A038" }}
+                  aria-hidden="true"
+                />
+                <p className="text-datum text-ink font-semibold">
+                  {slot.timeRange}
+                </p>
+                <p className="text-ink-soft mt-1 text-[12px]">{slot.period}</p>
+
+                <h3 className="font-heading text-h3 mt-3">{slot.title}</h3>
+
+                <p className="text-ink-soft mt-2 text-[14px] leading-relaxed">
+                  {slot.description}
+                </p>
               </div>
-              <div>
-                <h4 className="font-heading text-charcoal font-serif text-lg font-bold">
-                  {content.seasonalAdvice.title}
-                </h4>
-                <p className="text-slate-muted text-xs sm:text-sm">
-                  {content.seasonalAdvice.description}
+
+              <div className="border-ink/15 mt-auto space-y-2 border-t py-4 md:pb-7">
+                <p className="text-[13px] font-medium">
+                  <span
+                    className="mr-2 inline-block h-2 w-2 align-middle"
+                    style={{
+                      background: STAGE_COLOR[slot.id] ?? "#E4A038",
+                    }}
+                    aria-hidden="true"
+                  />
+                  {slot.lightingBadge}
+                </p>
+                <p className="text-ink-soft text-[13px] leading-relaxed">
+                  <span className="text-ink font-semibold">Ideal for:</span>{" "}
+                  {slot.recommendedFor}
                 </p>
               </div>
             </div>
+          ))}
+        </div>
 
-            <ul className="text-charcoal/80 grid grid-cols-1 gap-4 pt-2 text-xs sm:text-sm md:grid-cols-3">
-              {content.seasonalAdvice.bulletPoints.map((bullet, idx) => (
-                <li key={idx} className="flex items-start gap-2">
-                  <span className="text-forest-green text-base leading-none font-bold">
-                    •
-                  </span>
-                  <span>{bullet}</span>
-                </li>
-              ))}
-            </ul>
+        {/* Seasonal conditions */}
+        <div className="mt-12 grid gap-5 md:grid-cols-12 md:gap-10">
+          <div className="md:col-span-4">
+            <h4 className="font-heading text-h3">
+              {content.seasonalAdvice.title}
+            </h4>
+            <p className="text-ink-soft mt-1.5 text-[13px] leading-relaxed">
+              {content.seasonalAdvice.description}
+            </p>
           </div>
-        </RevealOnScroll>
+
+          <ul className="grid gap-4 md:col-span-8 md:grid-cols-3 md:gap-6">
+            {content.seasonalAdvice.bulletPoints.map((bullet, idx) => (
+              <li key={idx} className="flex gap-3 text-[13px] leading-relaxed">
+                <span
+                  className="bg-ink mt-1.5 h-1.5 w-1.5 shrink-0"
+                  aria-hidden="true"
+                />
+                <span>{bullet}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
       </Container>
     </section>
   );

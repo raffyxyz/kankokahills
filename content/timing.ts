@@ -1,7 +1,6 @@
 import { TimeSlotItem } from "./types";
 
 export interface TimingContent {
-  eyebrow: string;
   title: string;
   description: string;
   slots: TimeSlotItem[];
@@ -13,7 +12,6 @@ export interface TimingContent {
 }
 
 export const timingContent: TimingContent = {
-  eyebrow: "When to Visit",
   title: "A View That Evolves Throughout the Day",
   description:
     "Whether you arrive for early morning mist or stay for the glowing sunset, each hour brings a distinct mood to Kankoka Hills.",

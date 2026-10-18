@@ -2,7 +2,7 @@ import React from "react";
 import Link from "next/link";
 
 export type ButtonVariant =
-  "primary" | "secondary" | "outline" | "outline-light" | "ghost" | "sunset";
+  "primary" | "secondary" | "outline" | "outline-light" | "ghost" | "light";
 export type ButtonSize = "sm" | "md" | "lg";
 
 export interface ButtonBaseProps {
@@ -37,26 +37,23 @@ export function Button({
   ...restProps
 }: ButtonProps) {
   const baseClasses =
-    "inline-flex items-center justify-center font-medium rounded-full transition-all duration-200 cursor-pointer select-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-glow focus-visible:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed";
+    "inline-flex items-center justify-center rounded-[2px] font-medium transition-colors duration-200 cursor-pointer select-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-tide focus-visible:ring-offset-2 focus-visible:ring-offset-chalk disabled:opacity-50 disabled:cursor-not-allowed";
 
   const sizeClasses: Record<ButtonSize, string> = {
-    sm: "text-xs sm:text-sm px-4 py-2 gap-1.5",
-    md: "text-sm sm:text-base px-6 py-3 gap-2",
-    lg: "text-base sm:text-lg px-8 py-4 gap-2.5 font-semibold",
+    sm: "text-[13px] px-3.5 py-2 gap-1.5",
+    md: "text-sm px-5 py-2.5 gap-2",
+    lg: "text-[15px] px-7 py-3.5 gap-2.5",
   };
 
   const variantClasses: Record<ButtonVariant, string> = {
-    primary:
-      "bg-amber-glow text-charcoal shadow-md shadow-amber-glow/25 hover:bg-amber-glow/90 hover:shadow-lg hover:shadow-amber-glow/35 active:scale-[0.98]",
-    secondary:
-      "bg-forest-green text-warm-cream shadow-md shadow-forest-green/20 hover:bg-forest-green-dark active:scale-[0.98]",
+    primary: "bg-solar text-ink hover:bg-[#d08f2b] active:bg-[#c2841f]",
+    secondary: "bg-ink text-chalk hover:bg-[#1b2a26]",
     outline:
-      "border border-charcoal/20 text-charcoal hover:bg-charcoal/5 hover:border-charcoal/40 active:scale-[0.98]",
+      "border border-ink/25 text-ink hover:border-ink/50 hover:bg-ink/[0.04]",
     "outline-light":
-      "border border-warm-cream/40 text-warm-cream hover:bg-warm-cream/10 hover:border-warm-cream active:scale-[0.98]",
-    ghost: "text-charcoal hover:bg-charcoal/5 active:scale-[0.98]",
-    sunset:
-      "bg-gradient-to-r from-[var(--gradient-from)] via-[var(--gradient-via)] to-[var(--gradient-to)] text-charcoal font-semibold shadow-lg shadow-warm-rose/20 hover:brightness-105 active:scale-[0.98]",
+      "border border-chalk/35 text-chalk hover:border-chalk/70 hover:bg-chalk/10",
+    ghost: "text-ink hover:bg-ink/[0.06]",
+    light: "bg-chalk text-ink hover:bg-white",
   };
 
   const combinedClasses = `${baseClasses} ${sizeClasses[size]} ${variantClasses[variant]} ${className}`;

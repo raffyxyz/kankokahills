@@ -6,7 +6,6 @@ import { Button } from "@/components/ui/Button";
 export interface HeroSectionProps {
   headline: string;
   tagline: string;
-  locationBadge: string;
   primaryCta: { label: string; href: string };
   secondaryCta: { label: string; href: string };
   image: {
@@ -17,17 +16,24 @@ export interface HeroSectionProps {
   };
 }
 
+// Readings taken from the viewpoint itself; they sit along the horizon line
+// at the base of the photograph rather than in floating stat cards.
+const readings = [
+  { label: "Coordinates", value: "9.8398° N, 124.5517° E" },
+  { label: "Sightlines", value: "360°, unobstructed" },
+  { label: "Best light", value: "4:30 – 6:00 PM" },
+  { label: "From Tagbilaran", value: "2 – 2.5 hrs by road" },
+];
+
 export function HeroSection({
   headline,
   tagline,
-  locationBadge,
   primaryCta,
   secondaryCta,
   image,
 }: HeroSectionProps) {
   return (
-    <section className="bg-dusk-indigo text-warm-cream relative flex min-h-[92vh] items-center justify-center overflow-hidden sm:min-h-screen">
-      {/* Background Image with subtle cinematic scale */}
+    <section className="bg-ink text-chalk relative flex min-h-[92vh] flex-col justify-end overflow-hidden sm:min-h-screen">
       <div className="pointer-events-none absolute inset-0 z-0 select-none">
         <Image
           src={image.src}
@@ -36,74 +42,66 @@ export function HeroSection({
           priority
           quality={85}
           sizes="100vw"
-          className="animate-pulse-slow scale-105 object-cover object-center transition-transform duration-[12000ms] ease-out motion-reduce:scale-100"
+          className="object-cover object-center"
         />
-        {/* Layered cinematic gradient overlay ensuring high text contrast */}
+        {/* Scrim: heaviest at the base where the headline sits, still enough
+            at the top for the transparent header to stay legible */}
         <div
-          className="from-charcoal-deep via-dusk-indigo/60 absolute inset-0 bg-gradient-to-t to-black/40"
-          aria-hidden="true"
-        />
-        {/* Warm golden-hour tint overlay */}
-        <div
-          className="from-dusk-indigo/40 to-amber-glow/20 absolute inset-0 bg-gradient-to-r via-transparent mix-blend-overlay"
+          className="from-ink/90 via-ink/40 to-ink/65 absolute inset-0 bg-gradient-to-t"
           aria-hidden="true"
         />
       </div>
 
-      {/* Hero Content Container */}
-      <Container className="relative z-10 flex flex-col items-center pt-28 pb-20 text-center sm:py-32">
-        {/* Location pill */}
-        <div className="bg-warm-cream/15 text-soft-gold border-warm-cream/25 mb-6 inline-flex items-center gap-2 rounded-full border px-4 py-1.5 text-xs font-semibold tracking-wider uppercase shadow-sm backdrop-blur-md">
-          <span className="bg-amber-glow h-2 w-2 animate-pulse rounded-full" />
-          <span>{locationBadge}</span>
-        </div>
-
-        {/* Display Headline */}
-        <h1 className="font-heading text-fluid-display text-warm-cream mb-6 max-w-4xl font-serif leading-[1.08] font-bold tracking-tight drop-shadow-md">
+      <Container className="relative z-10 pt-36 pb-12 sm:pb-14">
+        <h1
+          className="text-display rise font-heading max-w-[15ch]"
+          style={{ animationDelay: "100ms" }}
+        >
           {headline}
         </h1>
 
-        {/* Tagline */}
-        <p className="text-fluid-lead text-warm-cream/90 mx-auto mb-10 max-w-2xl font-normal drop-shadow-sm">
+        <p
+          className="rise text-lead text-chalk/85 mt-6 max-w-[46ch]"
+          style={{ animationDelay: "340ms" }}
+        >
           {tagline}
         </p>
 
-        {/* Dual Call-to-Action Buttons */}
-        <div className="flex w-full flex-col items-center justify-center gap-4 sm:w-auto sm:flex-row">
-          <Button
-            href={secondaryCta.href}
-            variant="sunset"
-            size="lg"
-            className="w-full shadow-xl sm:w-auto"
-          >
-            {secondaryCta.label}
-          </Button>
-          <Button
-            href={primaryCta.href}
-            variant="outline-light"
-            size="lg"
-            className="w-full backdrop-blur-sm sm:w-auto"
-          >
+        <div
+          className="rise mt-9 flex flex-wrap items-center gap-x-8 gap-y-4"
+          style={{ animationDelay: "560ms" }}
+        >
+          <Button href={primaryCta.href} variant="primary" size="lg">
             {primaryCta.label}
           </Button>
-        </div>
-
-        {/* Scroll Cue Indicator */}
-        <div className="pt-12 sm:pt-16">
           <a
-            href="#about"
-            aria-label="Scroll down to explore Kankoka Hills"
-            className="group text-warm-cream/75 hover:text-amber-glow focus-visible:ring-amber-glow inline-flex flex-col items-center gap-2 rounded-full p-2 transition-colors focus-visible:ring-2 focus-visible:outline-none"
+            href={secondaryCta.href}
+            className="focus-visible:ring-solar text-chalk/85 decoration-chalk/40 hover:text-chalk hover:decoration-chalk focus-visible:ring-offset-ink text-[15px] underline decoration-1 underline-offset-[6px] transition-colors focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none"
           >
-            <span className="text-xs font-medium tracking-widest uppercase">
-              Discover
-            </span>
-            <div className="border-warm-cream/30 group-hover:border-amber-glow/60 flex h-12 w-8 items-start justify-center rounded-full border-2 p-1.5 transition-colors">
-              <span className="bg-amber-glow h-2.5 w-1.5 animate-bounce rounded-full" />
-            </div>
+            {secondaryCta.label}
           </a>
         </div>
       </Container>
+
+      {/* Horizon strip */}
+      <div className="border-chalk/25 bg-ink/45 relative z-10 border-t backdrop-blur-sm">
+        <Container>
+          <dl className="divide-chalk/15 divide-y sm:grid sm:grid-cols-4 sm:divide-x sm:divide-y-0">
+            {readings.map((reading, idx) => (
+              <div
+                key={reading.label}
+                className="rise flex items-baseline justify-between gap-4 py-3 sm:block sm:px-5 sm:py-4 sm:first:pl-0 sm:last:pr-0"
+                style={{ animationDelay: `${760 + idx * 90}ms` }}
+              >
+                <dt className="text-chalk/60 text-[12px]">{reading.label}</dt>
+                <dd className="text-datum text-chalk text-right font-medium sm:mt-1 sm:text-left">
+                  {reading.value}
+                </dd>
+              </div>
+            ))}
+          </dl>
+        </Container>
+      </div>
     </section>
   );
 }

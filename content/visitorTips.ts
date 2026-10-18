@@ -1,7 +1,6 @@
 import { VisitorTipItem } from "./types";
 
 export interface VisitorTipsContent {
-  eyebrow: string;
   title: string;
   description: string;
   whatToBring: VisitorTipItem[];
@@ -20,7 +19,6 @@ export interface VisitorTipsContent {
 }
 
 export const visitorTipsContent: VisitorTipsContent = {
-  eyebrow: "Visitor Guide",
   title: "Essential Tips for a Smooth Summit Visit",
   description:
     "Preparation ensures a safe, relaxing, and memorable visit to the hills. Here is what you need to know before you head up.",

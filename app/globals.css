@@ -1,8 +1,8 @@
 @import "tailwindcss";
 
 :root {
-  --background: #fff8ec;
-  --foreground: #22262e;
+  --background: #e9ede8;
+  --foreground: #0c1614;
 }
 
 @theme {
@@ -11,30 +11,109 @@
     var(--font-sans), ui-sans-serif, system-ui, -apple-system,
     BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 
-  /* Sunset Spectrum */
-  --color-dusk-indigo: #1e2a4a;
-  --color-dusk-indigo-dark: #131a2e;
-  --color-warm-rose: #d9646b;
-  --color-warm-rose-light: #eaa1a6;
-  --color-amber-glow: #f2a65a;
-  --color-amber-light: #f7c897;
-  --color-soft-gold: #fbd98d;
-  --color-soft-gold-light: #fdf0d2;
+  /* Daylight: the page runs from a cool morning ground to hill-shadow night */
+  --color-chalk: #e9ede8;
+  --color-shell: #f4f6f2;
+  --color-ink: #0c1614;
+  --color-ink-soft: #47554f;
+  --color-pine: #1e4b39;
+  --color-pine-deep: #143526;
+  --color-tide: #14607a;
+  --color-solar: #e4a038;
+  --color-mist: #c3cec7;
+}
 
-  /* Bohol Hill Greens */
-  --color-forest-green: #2f5d3a;
-  --color-forest-green-dark: #1e3b25;
-  --color-grass-green: #7ba05b;
-  --color-grass-green-light: #a4c588;
-  --color-sage-mist: #e8efe5;
+/* Fluid type scale */
+.text-display {
+  font-size: clamp(2.75rem, 6vw + 0.5rem, 6rem);
+  line-height: 0.98;
+  letter-spacing: -0.028em;
+  font-weight: 300;
+  font-variation-settings:
+    "opsz" 144,
+    "SOFT" 24,
+    "WONK" 1;
+}
 
-  /* Neutrals */
-  --color-warm-cream: #fff8ec;
-  --color-sand-white: #faf5eb;
-  --color-charcoal: #22262e;
-  --color-charcoal-deep: #14171c;
-  --color-slate-muted: #525866;
-  --color-slate-light: #8e95a5;
+.text-h1 {
+  font-size: clamp(1.9rem, 2.6vw + 0.75rem, 3.25rem);
+  line-height: 1.06;
+  letter-spacing: -0.022em;
+  font-weight: 400;
+}
+
+.text-h2 {
+  font-size: clamp(1.45rem, 1.4vw + 0.75rem, 2.1rem);
+  line-height: 1.15;
+  letter-spacing: -0.018em;
+  font-weight: 400;
+}
+
+.text-h3 {
+  font-size: clamp(1.1rem, 0.6vw + 0.85rem, 1.35rem);
+  line-height: 1.3;
+  letter-spacing: -0.012em;
+  font-weight: 500;
+}
+
+.text-lead {
+  font-size: clamp(1.0625rem, 0.4vw + 0.95rem, 1.3125rem);
+  line-height: 1.55;
+}
+
+.text-body {
+  font-size: 1rem;
+  line-height: 1.65;
+}
+
+.text-datum {
+  font-size: 0.8125rem;
+  line-height: 1.4;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.01em;
+}
+
+.text-measure {
+  max-width: 66ch;
+}
+
+/* Section rail: margin column + sighting rule, single column under lg */
+.rail-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 1.75rem;
+}
+
+@media (min-width: 1024px) {
+  .rail-grid {
+    grid-template-columns: 9rem minmax(0, 1fr);
+    gap: 2.5rem;
+  }
+
+  .rail-grid--wide {
+    grid-template-columns: 13rem minmax(0, 1fr);
+    gap: 3rem;
+  }
+
+  .rail-rule > .rail-body {
+    border-left: 1px solid var(--color-mist);
+    padding-left: 2.5rem;
+  }
+}
+
+.rail-label {
+  color: var(--color-pine);
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 1.3;
+}
+
+/* Spec rows: label ····· value, used for fees, hours and contact */
+.leader {
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+  width: 100%;
 }
 
 html {
@@ -63,72 +142,42 @@ body {
   overflow-x: hidden;
 }
 
-/* Fluid Typography utilities */
-.text-fluid-display {
-  font-size: clamp(2.75rem, 5vw + 1rem, 5.25rem);
-  line-height: 1.08;
-  letter-spacing: -0.025em;
+::selection {
+  background: color-mix(in srgb, var(--color-solar) 45%, transparent);
 }
 
-.text-fluid-h1 {
-  font-size: clamp(2.15rem, 3.5vw + 0.5rem, 3.5rem);
-  line-height: 1.15;
-  letter-spacing: -0.02em;
+/* Hero load-in: one orchestrated moment, never repeated */
+@keyframes rise-in {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-.text-fluid-h2 {
-  font-size: clamp(1.65rem, 2.2vw + 0.5rem, 2.5rem);
-  line-height: 1.25;
-  letter-spacing: -0.015em;
+.rise {
+  animation: rise-in 900ms cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
-.text-fluid-h3 {
-  font-size: clamp(1.25rem, 1.4vw + 0.25rem, 1.75rem);
-  line-height: 1.35;
+/* The arc draws itself once, when the band comes into view */
+@keyframes draw-arc {
+  to {
+    stroke-dashoffset: 0;
+  }
 }
 
-.text-fluid-lead {
-  font-size: clamp(1.05rem, 0.5vw + 0.95rem, 1.25rem);
-  line-height: 1.6;
+.arc-path {
+  stroke-dasharray: 1200;
+  stroke-dashoffset: 1200;
 }
 
-/* Animatable gradient custom properties for smooth color transitions */
-@property --gradient-from {
-  syntax: '<color>';
-  inherits: true;
-  initial-value: #d9646b;
+.arc-drawn .arc-path {
+  animation: draw-arc 1600ms cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }
 
-@property --gradient-via {
-  syntax: '<color>';
-  inherits: true;
-  initial-value: #f2a65a;
-}
-
-@property --gradient-to {
-  syntax: '<color>';
-  inherits: true;
-  initial-value: #fbd98d;
-}
-
-/* Scrolled state: collapses the sunset gradient to a solid amber */
-.btn-scrolled {
-  --gradient-from: var(--color-amber-glow);
-  --gradient-via: var(--color-amber-glow);
-  --gradient-to: var(--color-amber-glow);
-}
-
-/* Scroll reveal helper classes */
-.reveal-init {
-  opacity: 0;
-  transform: translateY(24px);
-  transition:
-    opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
-    transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-  will-change: opacity, transform;
-}
-
-.reveal-visible {
-  opacity: 1;
-  transform: translateY(0);
+.arc-drawn .arc-stop {
+  animation: rise-in 600ms cubic-bezier(0.16, 1, 0.3, 1) both;
 }

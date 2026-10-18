@@ -32,11 +32,10 @@ export default function Home() {
       />
 
       <main id="main-content" className="flex-1">
-        {/* 1. Hero Section */}
+        {/* 1. Hero: the photograph, the headline, the readings along the horizon */}
         <HeroSection
-          headline="Where the Sky Touches the Hills of Candijay"
+          headline="Where the sky touches the hills of Candijay"
           tagline={siteConfig.tagline}
-          locationBadge={`${siteConfig.location.spotName} • ${siteConfig.location.municipality}, ${siteConfig.location.province}`}
           primaryCta={siteConfig.primaryCta}
           secondaryCta={siteConfig.secondaryCta}
           image={{
@@ -47,28 +46,19 @@ export default function Home() {
           }}
         />
 
-        {/* Transition: Hero -> Morning About */}
-        <HillDivider variant="morning-to-day" fillBottom="text-warm-cream" />
-
         {/* 2. About Kankoka Hills */}
         <AboutSection content={aboutContent} />
 
-        {/* 3. The View & Highlights */}
+        {/* 3. The view, as full-bleed strips */}
         <HighlightsSection content={highlightsContent} />
 
-        {/* Transition: Day -> Golden Hour */}
-        <HillDivider variant="day-to-golden" fillBottom="text-warm-cream" />
-
-        {/* 4. Best Time to Visit (Day-Arc Timeline) */}
+        {/* 4. Best time to visit — the daylight band */}
         <BestTimeSection content={timingContent} />
 
-        {/* 5. Full-Bleed Gallery with Lightbox */}
+        {/* 5. Gallery with lightbox */}
         <GallerySection photos={galleryItems} />
 
-        {/* Transition: Golden Hour -> Dusk */}
-        <HillDivider variant="golden-to-dusk" fillBottom="text-sand-white" />
-
-        {/* 6. How to Get There (with on-demand Map Facade) */}
+        {/* 6. How to get there */}
         <GettingThereSection
           content={directionsContent}
           locationName={siteConfig.name}
@@ -78,16 +68,18 @@ export default function Home() {
           googleMapsUrl={siteConfig.location.googleMapsUrl}
         />
 
-        {/* 7. Visitor Tips, Fees & Stewardship */}
+        {/* 7. Visitor tips, fees & stewardship */}
         <VisitorTipsSection content={visitorTipsContent} />
 
-        {/* 8. Frequently Asked Questions */}
+        {/* 8. Frequently asked questions */}
         <FaqSection content={faqContent} />
 
-        {/* Transition: Dusk -> Night */}
-        <HillDivider variant="dusk-to-night" fillBottom="text-dusk-indigo" />
+        {/* The ridge, drawn once, where the page falls into dusk */}
+        <div className="bg-chalk">
+          <HillDivider variant="dusk-to-night" fillBottom="text-ink" />
+        </div>
 
-        {/* 9. Final CTA & Tourism Contact Section */}
+        {/* 9. Final CTA & tourism contact */}
         <CtaContactSection siteConfig={siteConfig} />
       </main>
 

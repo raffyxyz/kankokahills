@@ -84,7 +84,7 @@ export function MobileNav({ isOpen, onClose, items, cta }: MobileNavProps) {
       ref={dialogRef}
       inert={!isOpen}
       aria-hidden={!isOpen}
-      className={`bg-charcoal-deep/95 text-warm-cream fixed inset-0 z-50 flex flex-col backdrop-blur-lg transition-all duration-300 ease-out lg:hidden ${
+      className={`bg-ink/97 text-chalk fixed inset-0 z-50 flex flex-col backdrop-blur-lg transition-all duration-300 ease-out lg:hidden ${
         isOpen
           ? "pointer-events-auto translate-y-0 opacity-100"
           : "pointer-events-none translate-y-4 opacity-0"
@@ -92,12 +92,12 @@ export function MobileNav({ isOpen, onClose, items, cta }: MobileNavProps) {
     >
       {/* Header bar with close button */}
       <div
-        className={`border-warm-cream/10 flex items-center justify-between border-b px-6 py-5 transition-opacity duration-300 ease-out ${
+        className={`border-chalk/15 flex items-center justify-between border-b px-6 py-5 transition-opacity duration-300 ease-out ${
           isOpen ? "opacity-100" : "opacity-0"
         }`}
         style={{ transitionDelay: isOpen ? "50ms" : "0ms" }}
       >
-        <span className="font-heading text-amber-glow font-serif text-xl tracking-tight">
+        <span className="font-heading text-chalk text-xl font-medium tracking-tight">
           Kankoka Hills
         </span>
         <button
@@ -105,7 +105,7 @@ export function MobileNav({ isOpen, onClose, items, cta }: MobileNavProps) {
           type="button"
           onClick={onClose}
           aria-label="Close menu"
-          className="text-warm-cream/80 hover:text-warm-cream hover:bg-warm-cream/10 focus-visible:ring-amber-glow -mr-2 rounded-full p-2 focus-visible:ring-2 focus-visible:outline-none"
+          className="text-chalk/80 hover:text-chalk hover:bg-chalk/10 focus-visible:ring-solar -mr-2 rounded-[2px] p-2 focus-visible:ring-2 focus-visible:outline-none"
         >
           <svg
             className="h-6 w-6"
@@ -130,7 +130,7 @@ export function MobileNav({ isOpen, onClose, items, cta }: MobileNavProps) {
             key={item.href}
             href={item.href}
             onClick={onClose}
-            className={`text-warm-cream/90 hover:text-amber-glow border-warm-cream/5 border-b py-2 font-serif text-2xl font-medium transition-all duration-300 ease-out ${
+            className={`text-chalk/90 hover:text-solar border-chalk/10 font-heading border-b py-3 text-2xl font-medium transition-all duration-300 ease-out ${
               isOpen ? "translate-y-0 opacity-100" : "translate-y-2 opacity-0"
             }`}
             style={{
@@ -151,7 +151,7 @@ export function MobileNav({ isOpen, onClose, items, cta }: MobileNavProps) {
         >
           <Button
             href={cta.href}
-            variant="sunset"
+            variant="primary"
             size="lg"
             className="w-full justify-center shadow-lg"
             onClick={onClose}
@@ -162,7 +162,7 @@ export function MobileNav({ isOpen, onClose, items, cta }: MobileNavProps) {
       </nav>
 
       {/* Footer info in drawer */}
-      <div className="text-warm-cream/50 border-warm-cream/10 border-t px-8 py-6 text-xs">
+      <div className="text-chalk/55 border-chalk/10 border-t px-8 py-6 text-xs">
         <p>Candijay, Bohol, Philippines</p>
       </div>
     </div>

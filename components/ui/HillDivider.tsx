@@ -14,45 +14,46 @@ export interface HillDividerProps {
   className?: string;
 }
 
+// A ridge silhouette rather than a decorative wave: three receding hill lines
+// whose fills come from the palette, drawn once where the page falls into dusk.
 export function HillDivider({
-  variant = "day-to-golden",
+  variant = "dusk-to-night",
   fillBottom,
   flip = false,
   className = "",
 }: HillDividerProps) {
-  // Preset color layers for the rolling hill silhouettes
   const layers = (() => {
     switch (variant) {
       case "morning-to-day":
         return {
-          back: "text-forest-green/20",
-          mid: "text-grass-green/40",
-          front: fillBottom || "text-warm-cream",
+          back: "text-mist/60",
+          mid: "text-pine/30",
+          front: fillBottom || "text-chalk",
         };
       case "day-to-golden":
         return {
-          back: "text-amber-glow/20",
-          mid: "text-warm-rose/30",
-          front: fillBottom || "text-sand-white",
+          back: "text-mist/70",
+          mid: "text-solar/30",
+          front: fillBottom || "text-chalk",
         };
       case "golden-to-dusk":
         return {
-          back: "text-warm-rose/40",
-          mid: "text-amber-glow/50",
-          front: fillBottom || "text-dusk-indigo",
+          back: "text-solar/40",
+          mid: "text-tide/30",
+          front: fillBottom || "text-ink",
         };
       case "dusk-to-night":
         return {
-          back: "text-dusk-indigo-dark/60",
-          mid: "text-dusk-indigo/80",
-          front: fillBottom || "text-dusk-indigo",
+          back: "text-tide/35",
+          mid: "text-pine/60",
+          front: fillBottom || "text-ink",
         };
       case "custom":
       default:
         return {
-          back: "text-forest-green/15",
-          mid: "text-grass-green/30",
-          front: fillBottom || "text-warm-cream",
+          back: "text-mist/50",
+          mid: "text-pine/25",
+          front: fillBottom || "text-chalk",
         };
     }
   })();
@@ -65,7 +66,7 @@ export function HillDivider({
       aria-hidden="true"
     >
       <svg
-        className="block h-10 w-full sm:h-16 md:h-24 lg:h-28"
+        className="block h-14 w-full sm:h-20 md:h-28"
         viewBox="0 0 1440 120"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
@@ -81,7 +82,7 @@ export function HillDivider({
           d="M0 75C120 50 260 45 380 65C500 85 640 100 780 85C920 70 1060 40 1200 55C1300 65 1380 80 1440 85V120H0V75Z"
           className={`fill-current ${layers.mid}`}
         />
-        {/* Foreground rolling hill contour */}
+        {/* Foreground crest — the near hill goes solid */}
         <path
           d="M0 90C160 65 320 80 480 95C640 110 800 105 960 85C1120 65 1280 75 1440 92V120H0V90Z"
           className={`fill-current ${layers.front}`}

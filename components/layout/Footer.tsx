@@ -14,60 +14,46 @@ export function Footer({
 }: FooterProps) {
   const navLinks = [
     { label: "About", href: "#about" },
-    { label: "The View", href: "#view" },
-    { label: "Best Time to Visit", href: "#timing" },
+    { label: "The view", href: "#view" },
+    { label: "Best time to visit", href: "#timing" },
     { label: "Gallery", href: "#gallery" },
     { label: "Directions", href: "#getting-there" },
-    { label: "Visitor Tips", href: "#tips" },
+    { label: "Visitor tips", href: "#tips" },
     { label: "FAQ", href: "#faq" },
   ];
 
   return (
-    <footer className="border-warm-cream/10 bg-charcoal-deep text-warm-cream/80 border-t pt-16 pb-12">
+    <footer className="border-chalk/15 bg-ink text-chalk/70 border-t pt-14 pb-10">
       <Container>
-        <div className="border-warm-cream/10 grid grid-cols-1 gap-10 border-b pb-12 md:grid-cols-12">
-          {/* Brand & Mission Column */}
+        <div className="grid grid-cols-1 gap-10 md:grid-cols-12">
+          {/* Brand */}
           <div className="space-y-4 md:col-span-6">
             <div className="flex flex-col">
-              <span className="font-heading text-warm-cream font-serif text-2xl font-bold tracking-tight">
+              <span className="font-heading text-chalk text-[21px] font-medium tracking-tight">
                 {siteName}
               </span>
-              <span className="text-amber-glow mt-0.5 text-xs font-medium tracking-wider uppercase">
+              <span className="text-chalk/50 mt-0.5 text-[11px]">
                 {location}
               </span>
             </div>
-            <p className="text-warm-cream/70 max-w-md text-sm leading-relaxed">
+            <p className="text-chalk/65 max-w-md text-[14px] leading-relaxed">
               {tagline}
             </p>
-            <div className="pt-2">
-              <span className="border-forest-green/40 bg-forest-green/30 text-grass-green-light inline-flex items-center gap-2 rounded-full border px-3 py-1.5 text-xs">
-                <svg
-                  className="h-3.5 w-3.5 shrink-0"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-                    clipRule="evenodd"
-                  />
-                </svg>
-                Leave No Trace — Help keep Bohol&apos;s hills pristine
-              </span>
-            </div>
+            <p className="text-chalk/55 flex items-center gap-2.5 text-[12px]">
+              <span className="bg-pine h-2 w-2 shrink-0" aria-hidden="true" />
+              Leave no trace — help keep Bohol&apos;s hills pristine
+            </p>
           </div>
 
-          {/* Quick Links Column */}
-          <div className="space-y-3 md:col-span-3">
-            <p className="text-warm-cream text-xs font-semibold tracking-wider uppercase">
-              Quick Navigation
-            </p>
-            <ul className="space-y-2 text-sm">
+          {/* Quick links */}
+          <div className="md:col-span-3">
+            <p className="text-chalk/50 text-[12px]">Quick navigation</p>
+            <ul className="mt-3 space-y-2 text-[14px]">
               {navLinks.slice(0, 4).map((link) => (
                 <li key={link.href}>
                   <a
                     href={link.href}
-                    className="hover:text-amber-glow focus-visible:ring-amber-glow rounded focus-visible:ring-1 focus-visible:outline-none"
+                    className="focus-visible:ring-solar hover:text-chalk rounded-[2px] transition-colors focus-visible:ring-2 focus-visible:outline-none"
                   >
                     {link.label}
                   </a>
@@ -76,17 +62,15 @@ export function Footer({
             </ul>
           </div>
 
-          {/* Visitor Guide Column */}
-          <div className="space-y-3 md:col-span-3">
-            <p className="text-warm-cream text-xs font-semibold tracking-wider uppercase">
-              Visitor Info
-            </p>
-            <ul className="space-y-2 text-sm">
+          {/* Visitor guide */}
+          <div className="md:col-span-3">
+            <p className="text-chalk/50 text-[12px]">Visitor info</p>
+            <ul className="mt-3 space-y-2 text-[14px]">
               {navLinks.slice(4).map((link) => (
                 <li key={link.href}>
                   <a
                     href={link.href}
-                    className="hover:text-amber-glow focus-visible:ring-amber-glow rounded focus-visible:ring-1 focus-visible:outline-none"
+                    className="focus-visible:ring-solar hover:text-chalk rounded-[2px] transition-colors focus-visible:ring-2 focus-visible:outline-none"
                   >
                     {link.label}
                   </a>
@@ -95,33 +79,22 @@ export function Footer({
               <li>
                 <a
                   href="#contact"
-                  className="hover:text-amber-glow focus-visible:ring-amber-glow rounded focus-visible:ring-1 focus-visible:outline-none"
+                  className="focus-visible:ring-solar hover:text-chalk rounded-[2px] transition-colors focus-visible:ring-2 focus-visible:outline-none"
                 >
-                  Contact & Inquiries
+                  Contact &amp; inquiries
                 </a>
               </li>
             </ul>
           </div>
         </div>
 
-        {/* Demo Disclaimer */}
-        <div className="border-amber-glow/25 bg-amber-glow/5 mt-10 space-y-2 rounded-xl border px-5 py-5 sm:px-6">
-          <p className="text-amber-glow flex items-center gap-2 text-xs font-bold tracking-wider uppercase">
-            <svg
-              className="h-4 w-4 shrink-0"
-              fill="currentColor"
-              viewBox="0 0 24 24"
-              aria-hidden="true"
-            >
-              <path
-                fillRule="evenodd"
-                d="M9.401 3.003c1.155-2 4.043-2 5.197 0l7.355 12.748c1.154 2-.29 4.5-2.599 4.5H4.645c-2.309 0-3.752-2.5-2.598-4.5L9.4 3.003zM12 8.25a.75.75 0 01.75.75v3.75a.75.75 0 01-1.5 0V9a.75.75 0 01.75-.75zm0 8.25a.75.75 0 100-1.5.75.75 0 000 1.5z"
-                clipRule="evenodd"
-              />
-            </svg>
-            Demo Website Disclaimer
+        {/* Demo disclaimer — a ruled note, not a highlight box */}
+        <div className="border-chalk/15 mt-12 grid gap-3 border-t pt-6 md:grid-cols-12 md:gap-8">
+          <p className="text-chalk/80 flex items-center gap-2.5 text-[13px] font-medium md:col-span-3">
+            <span className="bg-solar h-2 w-2 shrink-0" aria-hidden="true" />
+            Demo website disclaimer
           </p>
-          <p className="text-warm-cream/70 max-w-3xl text-xs leading-relaxed sm:text-sm">
+          <p className="text-chalk/60 max-w-[80ch] text-[13px] leading-relaxed md:col-span-9">
             This website is a demo presentation prototype only. It is not an
             official site and is not affiliated with or endorsed by Kankoka
             Hills, the Candijay Municipal Tourism Office, or any government
@@ -131,33 +104,31 @@ export function Footer({
           </p>
         </div>
 
-        {/* Bottom Bar */}
-        <div className="text-warm-cream/50 flex flex-col items-center justify-between gap-4 pt-8 text-xs sm:flex-row">
+        {/* Bottom bar */}
+        <div className="text-chalk/45 border-chalk/10 mt-8 flex flex-col items-start justify-between gap-4 border-t pt-6 text-[13px] sm:flex-row sm:items-center">
           <p>
             © {new Date().getFullYear()} Kankoka Hills. Tourism showcase for
             Candijay, Bohol.
           </p>
-          <div className="flex items-center gap-6">
-            <a
-              href="#main-content"
-              className="hover:text-amber-glow focus-visible:ring-amber-glow flex items-center gap-1 rounded focus-visible:ring-1 focus-visible:outline-none"
+          <a
+            href="#main-content"
+            className="focus-visible:ring-solar hover:text-chalk flex items-center gap-1.5 rounded-[2px] transition-colors focus-visible:ring-2 focus-visible:outline-none"
+          >
+            <span>Back to top</span>
+            <svg
+              className="h-3.5 w-3.5"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
             >
-              <span>Back to top</span>
-              <svg
-                className="h-3.5 w-3.5"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M5 10l7-7m0 0l7 7m-7-7v18"
-                />
-              </svg>
-            </a>
-          </div>
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M5 10l7-7m0 0l7 7m-7-7v18"
+              />
+            </svg>
+          </a>
         </div>
       </Container>
     </footer>

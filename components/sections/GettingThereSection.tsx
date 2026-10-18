@@ -1,7 +1,6 @@
 import React from "react";
 import { Container } from "@/components/ui/Container";
 import { Badge } from "@/components/ui/Badge";
-import { RevealOnScroll } from "@/components/ui/RevealOnScroll";
 import { MapFacade } from "@/components/ui/MapFacade";
 import { DirectionsContent } from "@/content/directions";
 
@@ -26,153 +25,115 @@ export function GettingThereSection({
   googleMapsUrl,
 }: GettingThereSectionProps) {
   return (
-    <section
-      id="getting-there"
-      className="bg-sand-white text-charcoal py-20 sm:py-28"
-    >
+    <section id="getting-there" className="bg-shell py-16 sm:py-20 lg:py-24">
       <Container>
-        {/* Section Header */}
-        <div className="mx-auto mb-16 max-w-3xl space-y-4 text-center">
-          <RevealOnScroll>
-            <span className="text-forest-green text-xs font-bold tracking-widest uppercase">
-              {content.eyebrow}
-            </span>
-            <h2 className="font-heading text-fluid-h1 text-charcoal mt-2 font-serif font-bold tracking-tight">
+        <div className="rail-grid rail-rule">
+          <div className="rail">
+            <p className="rail-label">Getting there</p>
+            <p className="text-datum text-ink-soft mt-2">
+              20–30 min
+              <br />
+              from town proper
+            </p>
+          </div>
+
+          <div className="rail-body">
+            <h2 className="font-heading text-h1 text-ink max-w-[16ch]">
               {content.title}
             </h2>
-            <p className="text-fluid-lead text-slate-muted mx-auto mt-4 max-w-2xl">
+            <p className="text-lead text-ink-soft mt-4 max-w-[54ch]">
               {content.description}
             </p>
-          </RevealOnScroll>
-        </div>
 
-        {/* Transport Options Grid */}
-        <div className="mb-16">
-          <RevealOnScroll>
-            <h3 className="text-charcoal/70 mb-6 text-center text-xs font-bold tracking-wider uppercase">
-              Recommended Transport Options
-            </h3>
-          </RevealOnScroll>
+            {/* Ways up — a timetable, not three cards */}
+            <div className="border-mist mt-12 border-t">
+              <h3 className="text-ink-soft py-4 text-[13px] font-medium">
+                Getting from Candijay town center to the hills
+              </h3>
 
-          <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
-            {content.transportOptions.map((opt, idx) => (
-              <RevealOnScroll key={opt.mode} delayMs={idx * 100}>
+              {content.transportOptions.map((opt) => (
                 <div
-                  className={`flex h-full flex-col justify-between rounded-2xl border p-6 transition-all ${
-                    opt.recommended
-                      ? "bg-warm-cream border-amber-glow/40 ring-amber-glow/30 shadow-md ring-1"
-                      : "bg-warm-cream/60 border-charcoal/5 hover:border-charcoal/20 shadow-xs"
-                  }`}
+                  key={opt.mode}
+                  className="border-mist grid gap-2 border-t py-5 md:grid-cols-12 md:gap-8"
                 >
-                  <div className="space-y-3">
-                    <div className="flex items-center justify-between">
-                      <span className="text-slate-muted font-mono text-xs font-medium">
-                        {opt.travelTime}
-                      </span>
-                      {opt.recommended && (
-                        <Badge variant="amber">Most Popular</Badge>
-                      )}
-                    </div>
-                    <h4 className="font-heading text-charcoal font-serif text-xl font-bold">
-                      {opt.mode}
-                    </h4>
-                    <p className="text-slate-muted text-sm leading-relaxed">
-                      {opt.description}
-                    </p>
+                  <div className="flex flex-wrap items-baseline gap-x-3 gap-y-2 md:col-span-4">
+                    <h4 className="font-heading text-h3">{opt.mode}</h4>
+                    {opt.recommended && (
+                      <Badge variant="amber">Most popular</Badge>
+                    )}
                   </div>
+                  <p className="text-datum text-ink-soft md:col-span-3">
+                    {opt.travelTime}
+                  </p>
+                  <p className="text-ink-soft text-[14px] leading-relaxed md:col-span-5">
+                    {opt.description}
+                  </p>
                 </div>
-              </RevealOnScroll>
-            ))}
-          </div>
-        </div>
+              ))}
+            </div>
 
-        {/* Route Steps & Interactive Map Grid */}
-        <div className="mb-16 grid grid-cols-1 items-start gap-10 lg:grid-cols-12">
-          {/* Left Column: Route Steps Timeline */}
-          <div className="lg:col-span-7">
-            <RevealOnScroll>
-              <div className="bg-warm-cream border-charcoal/5 space-y-8 rounded-3xl border p-8 shadow-md sm:p-10">
-                <div className="border-charcoal/10 border-b pb-4">
-                  <span className="text-forest-green text-xs font-bold tracking-wider uppercase">
-                    Step-by-Step Route
-                  </span>
-                  <h3 className="font-heading text-charcoal mt-1 font-serif text-2xl font-bold">
-                    {content.departurePoint}
-                  </h3>
-                </div>
+            {/* Route and map */}
+            <div className="mt-14 grid gap-10 lg:grid-cols-12 lg:gap-12">
+              <div className="lg:col-span-7">
+                <h3 className="font-heading text-h2 border-ink/20 border-b pb-4">
+                  {content.departurePoint}
+                </h3>
 
-                <div className="before:bg-charcoal/10 relative space-y-8 before:absolute before:inset-0 before:left-4 before:h-full before:w-0.5">
+                <ol className="before:bg-mist relative mt-8 space-y-8 before:absolute before:inset-y-0 before:left-[15px] before:w-px">
                   {content.routeSteps.map((step) => (
-                    <div
-                      key={step.stepNumber}
-                      className="relative flex items-start gap-6"
-                    >
-                      <div className="bg-forest-green text-warm-cream ring-warm-cream flex h-8 w-8 shrink-0 items-center justify-center rounded-full font-serif text-sm font-bold ring-4">
+                    <li key={step.stepNumber} className="relative flex gap-5">
+                      <span className="bg-pine text-chalk flex h-8 w-8 shrink-0 items-center justify-center text-[13px] font-semibold tabular-nums">
                         {step.stepNumber}
-                      </div>
-                      <div className="flex-1 space-y-1.5 pt-0.5">
-                        <h4 className="font-heading text-charcoal font-serif text-lg font-bold">
-                          {step.title}
-                        </h4>
-                        <p className="text-slate-muted text-sm leading-relaxed">
+                      </span>
+                      <div className="space-y-1 pt-0.5">
+                        <h4 className="font-heading text-h3">{step.title}</h4>
+                        <p className="text-ink-soft max-w-[58ch] text-[14px] leading-relaxed">
                           {step.instruction}
                         </p>
                         {step.note && (
-                          <p className="mt-2 rounded-lg border border-amber-200/60 bg-amber-50 p-2.5 text-xs font-medium text-amber-800">
+                          <p className="text-ink max-w-[58ch] pt-1 text-[13px] font-medium">
                             {step.note}
                           </p>
                         )}
                       </div>
-                    </div>
+                    </li>
                   ))}
-                </div>
+                </ol>
               </div>
-            </RevealOnScroll>
-          </div>
 
-          {/* Right Column: On-Demand Map Facade */}
-          <div className="h-full lg:col-span-5">
-            <RevealOnScroll delayMs={150}>
-              <MapFacade
-                locationName={locationName}
-                municipality={municipality}
-                province={province}
-                coordinates={coordinates}
-                googleMapsUrl={googleMapsUrl}
-              />
-            </RevealOnScroll>
+              <div className="lg:col-span-5">
+                <MapFacade
+                  locationName={locationName}
+                  municipality={municipality}
+                  province={province}
+                  coordinates={coordinates}
+                  googleMapsUrl={googleMapsUrl}
+                />
+              </div>
+            </div>
+
+            {/* Travel notes */}
+            <div className="border-mist mt-12 border-t pt-6">
+              <h3 className="text-ink-soft text-[13px] font-medium">
+                Travel notes
+              </h3>
+              <ul className="mt-4 grid gap-5 sm:grid-cols-3 sm:gap-8">
+                {content.travelAdvisories.map((advisory, idx) => (
+                  <li
+                    key={idx}
+                    className="flex gap-3 text-[13px] leading-relaxed"
+                  >
+                    <span
+                      className="bg-solar mt-1.5 h-1.5 w-1.5 shrink-0"
+                      aria-hidden="true"
+                    />
+                    <span>{advisory}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
         </div>
-
-        {/* Travel Advisories Box */}
-        <RevealOnScroll delayMs={150}>
-          <div className="bg-amber-glow/10 border-amber-glow/20 mx-auto max-w-4xl rounded-2xl border p-6">
-            <h4 className="font-heading text-charcoal mb-3 flex items-center gap-2 font-serif text-base font-bold">
-              <svg
-                className="h-5 w-5 shrink-0 text-amber-800"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                />
-              </svg>
-              Important Travel Notes
-            </h4>
-            <ul className="text-charcoal/80 grid grid-cols-1 gap-4 text-xs sm:grid-cols-3 sm:text-sm">
-              {content.travelAdvisories.map((advisory, idx) => (
-                <li key={idx} className="flex items-start gap-2">
-                  <span className="font-bold text-amber-800">•</span>
-                  <span>{advisory}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </RevealOnScroll>
       </Container>
     </section>
   );

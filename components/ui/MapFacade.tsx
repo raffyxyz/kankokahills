@@ -29,7 +29,7 @@ export function MapFacade({
   )}&t=m&z=14&output=embed&iwloc=near`;
 
   return (
-    <div className="border-charcoal/10 bg-sand-white relative flex min-h-[380px] w-full flex-col justify-between overflow-hidden rounded-3xl border shadow-lg sm:min-h-[440px]">
+    <div className="border-ink/15 bg-shell relative flex min-h-[380px] w-full flex-col justify-between overflow-hidden border sm:min-h-[440px]">
       {isMapLoaded ? (
         <iframe
           src={embedUrl}
@@ -40,22 +40,21 @@ export function MapFacade({
           referrerPolicy="no-referrer-when-downgrade"
         />
       ) : (
-        <div className="from-sand-white via-sage-mist/40 to-forest-green/10 relative flex flex-1 flex-col items-center justify-center bg-gradient-to-br p-8 text-center">
-          {/* Subtle topographic contour background illustration */}
+        <div className="relative flex flex-1 flex-col items-center justify-center p-8 text-center">
+          {/* Contour grid standing in for the map until it is loaded */}
           <div
-            className="pointer-events-none absolute inset-0 opacity-15"
+            className="pointer-events-none absolute inset-0 opacity-[0.35]"
             style={{
               backgroundImage:
-                "radial-gradient(circle at 25px 25px, #2F5D3A 1.5%, transparent 0%), radial-gradient(circle at 75px 75px, #2F5D3A 1.5%, transparent 0%)",
-              backgroundSize: "100px 100px",
+                "radial-gradient(circle at 20px 20px, #1E4B39 1.2%, transparent 0%)",
+              backgroundSize: "80px 80px",
             }}
             aria-hidden="true"
           />
 
-          {/* Map Pin Pinpoint Graphic */}
-          <div className="bg-forest-green text-warm-cream shadow-forest-green/20 relative z-10 mb-6 flex h-16 w-16 animate-bounce items-center justify-center rounded-full shadow-xl">
+          <div className="bg-pine text-chalk relative z-10 mb-6 flex h-14 w-14 items-center justify-center">
             <svg
-              className="h-8 w-8"
+              className="h-7 w-7"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -75,30 +74,25 @@ export function MapFacade({
             </svg>
           </div>
 
-          {/* Location Title & Coordinates */}
-          <div className="relative z-10 mb-8 max-w-md space-y-2">
-            <span className="text-forest-green text-xs font-bold tracking-widest uppercase">
-              GPS Viewpoint Location
-            </span>
-            <h3 className="font-heading text-charcoal font-serif text-2xl font-bold sm:text-3xl">
-              {locationName}
-            </h3>
-            <p className="text-slate-muted text-sm">
+          <div className="relative z-10 mb-8 max-w-md space-y-1.5">
+            <h3 className="font-heading text-h2 text-ink">{locationName}</h3>
+            <p className="text-ink-soft text-sm">
               {municipality}, {province}, Philippines
             </p>
-            <p className="text-charcoal/60 bg-warm-cream/80 border-charcoal/5 inline-block rounded-full border px-3 py-1 font-mono text-xs">
+            <p className="text-datum text-ink-soft">
               {coordinates.latitude}° N, {coordinates.longitude}° E
             </p>
           </div>
 
-          {/* Action Trigger Buttons */}
-          <div className="relative z-10 flex w-full flex-col items-center gap-3 sm:w-auto sm:flex-row">
+          {/* The facade sits in a narrow column, so the two actions stack
+              rather than compete for one row: each keeps its intrinsic width
+              and its label stays on a single line. */}
+          <div className="relative z-10 flex w-full flex-col items-center gap-3">
             <Button
               type="button"
               variant="primary"
               size="md"
               onClick={() => setIsMapLoaded(true)}
-              className="w-full sm:w-auto"
               icon={
                 <svg
                   className="h-4 w-4"
@@ -115,7 +109,7 @@ export function MapFacade({
                 </svg>
               }
             >
-              Load Interactive Map
+              Load interactive map
             </Button>
 
             <Button
@@ -123,7 +117,6 @@ export function MapFacade({
               variant="outline"
               size="md"
               isExternal
-              className="w-full sm:w-auto"
               icon={
                 <svg
                   className="h-4 w-4"

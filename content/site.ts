@@ -2,7 +2,8 @@ import { SiteConfig } from "./types";
 
 export const siteConfig: SiteConfig = {
   name: "Kankoka Hills",
-  tagline: "Where the sky meets the rolling ridges of Candijay, Bohol.",
+  tagline:
+    "The quiet climb above Candijay’s rolling ridges, made for morning mist, open breezes, and the golden hour.",
   location: {
     spotName: "Kankoka Hills",
     municipality: "Candijay",
@@ -17,19 +18,19 @@ export const siteConfig: SiteConfig = {
   },
   navigation: [
     { label: "About", href: "#about" },
-    { label: "The View", href: "#view" },
-    { label: "Best Time", href: "#timing" },
+    { label: "The view", href: "#view" },
+    { label: "Best time", href: "#timing" },
     { label: "Gallery", href: "#gallery" },
-    { label: "How to Get There", href: "#getting-there" },
-    { label: "Visitor Tips", href: "#tips" },
+    { label: "Getting there", href: "#getting-there" },
+    { label: "Visitor tips", href: "#tips" },
     { label: "FAQ", href: "#faq" },
   ],
   primaryCta: {
-    label: "Plan Your Visit",
+    label: "Plan your visit",
     href: "#tips",
   },
   secondaryCta: {
-    label: "See the View",
+    label: "See the view",
     href: "#view",
   },
   contact: {

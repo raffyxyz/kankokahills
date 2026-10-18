@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Fraunces, Plus_Jakarta_Sans } from "next/font/google";
+import { Archivo, Fraunces } from "next/font/google";
 import "./globals.css";
 
 import { SkipLink } from "@/components/layout/SkipLink";
@@ -9,9 +9,10 @@ const fraunces = Fraunces({
   variable: "--font-heading",
   subsets: ["latin"],
   display: "swap",
+  axes: ["SOFT", "WONK", "opsz"],
 });
 
-const plusJakartaSans = Plus_Jakarta_Sans({
+const archivo = Archivo({
   variable: "--font-sans",
   subsets: ["latin"],
   display: "swap",
@@ -86,7 +87,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#1E2A4A",
+  themeColor: "#0C1614",
   width: "device-width",
   initialScale: 1,
 };
@@ -132,7 +133,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${fraunces.variable} ${plusJakartaSans.variable} h-full antialiased`}
+      className={`${fraunces.variable} ${archivo.variable} h-full antialiased`}
     >
       <head>
         <script
@@ -140,7 +141,7 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-      <body className="bg-warm-cream text-charcoal selection:bg-amber-glow/30 selection:text-charcoal flex min-h-full flex-col font-sans">
+      <body className="bg-chalk text-ink flex min-h-full flex-col font-sans">
         <SkipLink />
         {children}
       </body>
